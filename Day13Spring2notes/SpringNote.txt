@@ -1,0 +1,605 @@
+1	Create a project with a name SpringExample and create a package com.trainingpoint under the src folder in the created project.
+2	Add required Spring libraries using Add External JARs option as explained in the Spring Hello World Example chapter.
+3	Add Spring JDBC specific latest libraries mysql-connector-java.jar, org.springframework.jdbc.jar and org.springframework.transaction.jar in the project. You can download required libraries if you do not have them already.
+4	Create DAO interface StudentDAO and list down all the required methods. Though it is not required and you can directly write StudentJDBCTemplate class, but as a good practice, let's do it.
+5	Create other required Java classes Student, StudentMapper, StudentJDBCTemplate and MainApp under the com.training package.
+6	Make sure you already created Student table in TEST database. Also make sure your MySQL server is working fine and you have read/write access on the database using the give username and password.
+7	Create Beans configuration file Beans.xml under the src folder.
+8	The final step is to create the content of all the Java files and Bean Configuration file and run the application as explained below.
+
+
+
+
+
+
+Let us create a database table Student in our database TEST. I assume you are working with MySQL database, if you work with any other database then you can change your DDL and SQL queries accordingly.
+
+CREATE TABLE Student(
+   ID   INT NOT NULL AUTO_INCREMENT,
+   NAME VARCHAR(20) NOT NULL,
+   AGE  INT NOT NULL,
+   PRIMARY KEY (ID)
+);
+Now we need to supply a DataSource to the JdbcTemplate so it can configure itself to get database access. You can configure the DataSource in the XML file with a piece of code as shown below:
+
+<bean id="dataSource"
+class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+   <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+   <property name="url" value="jdbc:mysql://localhost:3306/TEST"/>
+   <property name="username" value="root"/>
+   <property name="password" value="password"/>
+</bean>
+
+
+
+
+
+
+
+The JdbcTemplate class executes SQL queries, update statements and stored procedure calls, performs iteration over ResultSets and extraction of returned parameter values. It also catches JDBC exceptions and translates them to the generic, more informative, exception hierarchy defined in the org.springframework.dao package.
+Instances of the JdbcTemplate class are threadsafe once configured. So you can configure a single instance of a JdbcTemplate and then safely inject this shared reference into multiple DAOs.
+A common practice when using the JdbcTemplate class is to configure aDataSource in your Spring configuration file, and then dependency-inject that shared DataSource bean into your DAO classes, and the JdbcTemplate is created in the setter for the DataSource.
+
+
+
+
+
+
+While working with database using plain old JDBC, it becomes cumbersome to write unnecessary code to handle exceptions, opening and closing database connections etc. But Spring JDBC Framework takes care of all the low-level details starting from opening the connection, prepare and execute the SQL statement, process exceptions, handle transactions and finally close the connection.
+So what you have do is just define connection parameters and specify the SQL statement to be executed and do the required work for each iteration while fetching data from the database.
+Spring JDBC provides several approaches and correspondingly different classes to interface with the database. I'm going to take classic and the most popular approach which makes use of JdbcTemplate class of the framework. This is the central framework class that manages all the database communication and exception handling.
+
+
+
+
+
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+   <context:annotation-config/>
+
+   <!-- Definition for profile bean -->
+   <bean id="profile" class="com.training.Profile">
+   </bean>
+
+   <!-- Definition for student1 bean -->
+   <bean id="student1" class="com.training.Student">
+      <property name="name"  value="Zara" />
+      <property name="age"  value="11"/>
+   </bean>
+
+   <!-- Definition for student2 bean -->
+   <bean id="student2" class="com.training.Student">
+      <property name="name"  value="Nuha" />
+      <property name="age"  value="2"/>
+   </bean>
+
+</beans>
+
+
+
+
+package com.training;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class MainApp {
+   public static void main(String[] args) {
+      ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+
+      Profile profile = (Profile) context.getBean("profile");
+
+      profile.printAge();
+      profile.printName();
+   }
+}
+
+
+
+package com.training;
+
+   @Autowired
+   @Qualifier("student1")
+   private Student student;
+
+   public Profile(){
+      System.out.println("Inside Profile constructor." );
+   }
+
+   public void printAge() {
+      System.out.println("Age : " + student.getAge() );
+   }
+
+   public void printName() {
+      System.out.println("Name : " + student.getName() );
+   }
+}
+
+
+
+
+package com.training;
+
+public class Student {
+   private Integer age;
+   private String name;
+
+   public void setAge(Integer age) {
+      this.age = age;
+   }
+   
+   public Integer getAge() {
+      return age;
+   }
+
+   public void setName(String name) {
+      this.name = name;
+   }
+   
+   public String getName() {
+      return name;
+   }
+}
+
+
+
+There may be a situation when you create more than one bean of the same type and want to wire only one of them with a property, in such case you can use @Qualifier annotation along with @Autowired to remove the confusion by specifying which exact bean will be wired. Below is an example to show the use of @Qualifier annotation
+
+
+
+
+package com.training;
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class Student {
+   private Integer age;
+   private String name;
+
+   @Autowired(required=false)
+   public void setAge(Integer age) {
+      this.age = age;
+   }
+   
+   public Integer getAge() {
+      return age;
+   }
+
+   @Autowired
+   public void setName(String name) {
+      this.name = name;
+   }
+   
+   public String getName() {
+      return name;
+   }
+}
+
+
+
+
+
+By default, the @Autowired annotation implies the dependency is required similar to @Required annotation, however, you can turn off the default behavior by using (required=false) option with @Autowired.
+The following example will work even if you do not pass any value for age property but still it will demand for name property. You can try this example yourself because this is similar to @Required annotation example except that only Student.java file has been changed.
+
+
+
+
+
+
+
+
+package com.training.org;
+
+
+public class SpellChecker {
+   public SpellChecker(){
+      System.out.println("Inside SpellChecker constructor." );
+   }
+   public void checkSpelling(){
+      System.out.println("Inside checkSpelling." );
+   }
+   
+}
+
+
+
+
+
+
+package com.training.org;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class TextEditor {
+   private SpellChecker spellChecker;
+
+   @Autowired
+   public void setSpellChecker( SpellChecker spellChecker ){
+      this.spellChecker = spellChecker;
+   }
+   
+   public SpellChecker getSpellChecker( ) {
+      return spellChecker;
+   }
+   
+   public void spellCheck() {
+      spellChecker.checkSpelling();
+   }
+}
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	   <context:annotation-config/>
+
+   <!-- Definition for textEditor bean without constructor-arg  -->
+   <bean id="textEditor" class="com.training.org.TextEditor">
+   </bean>
+
+   <!-- Definition for spellChecker bean -->
+   <bean id="spellChecker" class="com.training.org.SpellChecker">
+   </bean>
+
+
+</beans>
+
+
+
+
+
+package com.training.org.main;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.training.org.TextEditor;
+
+public class MyMain {
+	public static void main(String[] args) {
+		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+
+		TextEditor te = (TextEditor) context.getBean("textEditor");
+
+		te.spellCheck();
+	}
+
+}
+
+
+
+
+
+
+
+The @Autowired annotation provides more fine-grained control over where and how autowiring should be accomplished. The @Autowired annotation can be used to autowire bean on the setter method just like @Required annotation, constructor, a property or methods with arbitrary names and/or multiple arguments.
+
+
+
+
+
+package com.training.org.main;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.training.org.Person;
+
+
+
+public class MyMain {
+	public static void main(String[] args) {
+		ApplicationContext context=new ClassPathXmlApplicationContext("applicationContext.xml");
+
+		Person p1=(Person)context.getBean("person");
+		System.out.println(p1.getPersonName());
+		System.out.println(p1.getPersonAge());
+		
+	
+	}
+
+}
+
+
+
+
+
+package com.training.org;
+
+import org.springframework.beans.factory.annotation.Required;
+
+public class Person {
+	
+	private String personName;
+	private int personAge;
+	
+	
+	public String getPersonName() {
+		return personName;
+	}
+	@Required
+	public void setPersonName(String personName) {
+		this.personName = personName;
+	}
+	public int getPersonAge() {
+		return personAge;
+	}
+	
+	@Required
+	public void setPersonAge(int personAge) {
+		this.personAge = personAge;
+	}
+	
+	
+	
+
+}
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+
+	<context:annotation-config/>
+	
+	   <bean id="person" class="com.training.org.Person">
+      <property name="personName"  value="Eshan" />
+		<property name="personAge" value="20"></property>
+    
+   </bean>
+	
+</beans>
+
+
+
+1	@Required
+The @Required annotation applies to bean property setter methods.
+
+2	@Autowired
+The @Autowired annotation can apply to bean property setter methods, non-setter methods, constructor and properties.
+
+3	@Qualifier
+The @Qualifier annotation along with @Autowired can be used to remove the confusion by specifiying which exact bean will be wired.
+
+4	JSR-250 Annotations
+Spring supports JSR-250 based annotations which include @Resource, @PostConstruct and @PreDestroy annotations.
+
+
+
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+
+	<context:annotation-config/>
+</beans>
+
+
+
+
+
+
+Once <context:annotation-config/> is configured, you can start annotating your code to indicate that Spring should automatically wire values into properties, methods, and constructors. Let us see few important annotations to understand how they work:
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+   <context:annotation-config/>
+   <!-- bean definitions go here -->
+</beans>
+
+
+
+
+Starting from Spring 2.5 it became possible to configure the dependency injection using annotations. So instead of using XML to describe a bean wiring, you can move the bean configuration into the component class itself by using annotations on the relevant class, method, or field declaration.
+Annotation injection is performed before XML injection, thus the latter configuration will override the former for properties wired through both approaches.
+Annotation wiring is not turned on in the Spring container by default. So, before we can use annotation-based wiring, we will need to enable it in our Spring configuration file. So consider to have following configuration file in case you want to use any annotation in your Spring application
+
+
+
+
+
+
+
+
+package com.training.org.main;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.training.org.Parent;
+
+
+public class MainClass {
+	public static void main(String[] args) {
+		ApplicationContext context=new ClassPathXmlApplicationContext("applicationContext.xml");
+
+		Parent p1=(Parent)context.getBean("parent");
+		p1.showParentDetails();
+		
+		
+	}
+
+}
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+               http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	
+	<bean id="child" class="com.training.org.Child"></bean>
+	<bean id="parent" class="com.training.org.Parent" autowire="byName"></bean>
+
+</beans>
+
+package com.training.org;
+
+public class Parent {
+	private Child child;
+	
+	public Parent() {
+		System.out.println("Default constructor of Parent is called");
+	}
+
+	public Parent(Child child) {
+		super();
+		System.out.println("Parameterised constructor of Parent is called");
+		this.child = child;
+	}
+	
+	public Child getChild() {
+		System.out.println("getChild is called");
+		return child;
+	}
+
+	public void setChild(Child child) {
+		System.out.println("setChild is called");
+		this.child = child;
+	}
+
+	public void showParentDetails() {
+		System.out.println("Parent Details are");
+		child.showChildDetails();
+	}
+	
+	
+	
+
+}
+
+
+
+package com.training.org;
+
+public class Child {
+	
+	public Child(){
+		System.out.println("Default constructor of Child is called");
+	}
+	
+	public void showChildDetails() {
+		System.out.println("Child-> showChildDetails is called");
+	}
+}
+
+
+
+
+No
+Mode
+Description
+1)
+no
+It is the default
+autowiring mode. It means no autowiring
+bydefault
+2)
+byName
+The
+byName mode injects the object dependency according
+to name of the bean. In such case, property name and bean
+name must be same. It internally calls setter method.
+3)
+byType
+The byType mode injects the object dependency according
+to type. So property name and bean name can be different.
+It internally calls setter method.
+4)
+constructor
+The constructor mode injects the dependency by calling the
+constructor of the class. It calls the constructor having large
+number of parameters.
+5)
+autodetect
+It is deprecated since Spring 3.
+
+
+
+
+
+
+
+
+Autowiring feature of spring framework enables you to inject the object
+dependency implicitly. It internally uses setter or constructor injection.
+?
+Autowiring can't be used to inject primitive and string values. It works with
+reference only.
+?
+Advantage of Autowiring
+?
+It requires the less code because we don't need to write the code to inject the
+dependency explicitly.
+?
+Disadvantage of Autowiring
+?
+No control of programmer.
+?
+It can't be used for primitive and string values.
+
+
+
+
+
+
+
+
+We can inject collection values by setter method in spring
+framework. There can be used three elements inside
+the property element.
+?
+It can be:
+?
+list
+?
+set
+?
+map
+?
+Each collection can have string based and non string based
+values.
