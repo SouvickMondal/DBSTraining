@@ -1,0 +1,645 @@
+https://eclipsesource.com/blogs/2013/01/21/10-tips-for-using-the-eclipse-memory-analyzer/
+    
+    
+    
+    
+
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.training</groupId>
+	<artifactId>HelloMavenProject</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+	</dependencies>
+	<properties>
+		<spring.version>5.2.9.RELEASE</spring.version>
+	</properties>
+</project>
+
+
+
+
+
+
+package com.training;
+
+public class HelloMaven {
+	private String name;
+	
+	public void setName(String name) {
+		this.name=name;
+	}
+
+	public void printName() {
+		System.out.println("Name is "+name);
+	}
+}
+
+
+
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+               http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="hellobean" class="com.training.HelloMaven">
+		<property name="name" value="Eshan Madake"></property>
+	</bean>
+
+</beans> 
+
+
+
+package com.training;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class App {
+	public static void main(String[] args) {
+		ApplicationContext context=new ClassPathXmlApplicationContext("applicationContext.xml");
+		HelloMaven h1=(HelloMaven)context.getBean("hellobean");
+		h1.printName();
+	}
+}
+
+
+
+
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.training</groupId>
+	<artifactId>HelloMavenProject</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+	</dependencies>
+	<properties>
+		<spring.version>5.2.9.RELEASE</spring.version>
+	</properties>
+</project>
+
+
+
+
+
+https://gofile.io/d/wy4Ha0
+    
+    
+    
+    
+    
+    
+
+
+<%@ page contentType="text/html; charset=UTF-8" %>
+<html>
+<head>
+<title>Hello World</title>
+</head>
+<body>
+   <h2>${message}</h2>
+</body>
+</html>
+
+
+
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="
+   http://www.springframework.org/schema/beans     
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+   http://www.springframework.org/schema/context 
+   http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+   <context:component-scan base-package="com.training.org" />
+
+   <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+      <property name="prefix" value="/WEB-INF/jsp/" />
+      <property name="suffix" value=".jsp" />
+   </bean>
+ 
+</beans>
+
+
+
+
+
+
+
+
+
+<web-app id="WebApp_ID" version="2.4"
+   xmlns="http://java.sun.com/xml/ns/j2ee" 
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+   http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+   <display-name>Spring MVC Application</display-name>
+
+   <servlet>
+      <servlet-name>HelloWeb</servlet-name>
+      <servlet-class>
+         org.springframework.web.servlet.DispatcherServlet
+      </servlet-class>
+      <load-on-startup>1</load-on-startup>
+   </servlet>
+
+   <servlet-mapping>
+      <servlet-name>HelloWeb</servlet-name>
+      <url-pattern>/</url-pattern>
+   </servlet-mapping>
+ 
+</web-app>
+
+
+
+
+    
+
+
+package com.training;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.ui.ModelMap;
+
+@Controller
+@RequestMapping("/hello")
+public class HelloController{
+ 
+   @RequestMapping(method = RequestMethod.GET)
+   public String printHello(ModelMap model) {
+      model.addAttribute("message", "Hello Spring MVC Framework!");
+
+      return "hello";
+   }
+
+}
+
+
+
+
+
+
+1	Create a Dynamic Web Project with a name HelloWeb and create a package com.training package under the src folder in the created project.
+2	Drag and drop below mentioned Spring and other libraries into the folder WebContent/WEB-INF/lib.
+3	Create a Java class HelloController under the com.training package.
+4	Create Spring configuration files web.xml and HelloWeb-servlet.xml under the WebContent/WEB-INF folder.
+5	Create a sub-folder with a name jsp under the WebContent/WEB-INF folder. Create a view file hello.jsp under this sub-folder.
+6	The final step is to create the content of all the source and configuration files and export the application as explained below.
+
+
+
+
+
+
+The Spring web MVC framework provides model-view-controller architecture and ready components that can be used to develop flexible and loosely coupled web applications. The MVC pattern results in separating the different aspects of the application (input logic, business logic, and UI logic), while providing a loose coupling between these elements.
+The Model encapsulates the application data and in general they will consist of POJO.
+The View is responsible for rendering the model data and in general it generates HTML output that the client's browser can interpret.
+The Controller is responsible for processing user requests and building appropriate model and passes it to the view for rendering.
+
+
+
+
+
+
+
+SHOW GLOBAL VARIABLES LIKE 'PORT';
+    
+    
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd ">
+
+   <!-- Initialization for data source -->
+
+   
+    <bean id="dataSource2" 
+      class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+      <property name="driverClassName" value="org.mariadb.jdbc.Driver"/>
+      <property name="url" value="jdbc:mariadb://localhost:3307/maria_test"/>
+      <property name="username" value="root"/>
+      <property name="password" value="shital@123"/>
+   </bean>
+
+   <!-- Definition for studentJDBCTemplate bean -->
+   <bean id="employeeJDBCTemplate" 
+      class="com.training.org.EmployeeJDBCTemplate">
+      <property name="dataSource"  ref="dataSource2" />    
+   </bean>
+      
+</beans>
+
+
+
+
+
+
+https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client/2.7.0
+    
+    
+    
+
+
+https://stackoverflow.com/questions/930900/how-do-i-set-the-time-zone-of-mysql#:~:text=To%20set%20a%20value%20for,a%20timezone%20table%20properly%20populated.)
+    
+    
+
+CREATE TABLE Student(
+   ID   INT NOT NULL AUTO_INCREMENT,
+   NAME VARCHAR(20) NOT NULL,
+   AGE  INT NOT NULL,
+   PRIMARY KEY (ID)
+);
+
+
+
+
+
+
+
+package com.training.org.main;
+import java.util.List;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.training.org.Student;
+import com.training.org.StudentJDBCTemplate;
+
+public class MainApp {
+   public static void main(String[] args) {
+      ApplicationContext context = 
+             new ClassPathXmlApplicationContext("applicationContext.xml");
+
+      StudentJDBCTemplate studentJDBCTemplate = (StudentJDBCTemplate)context.getBean("studentJDBCTemplate");
+      
+      System.out.println("------Records Creation--------" );
+      studentJDBCTemplate.create("Zara", 11);
+      studentJDBCTemplate.create("Nuha", 2);
+      studentJDBCTemplate.create("Ayan", 15);
+
+      System.out.println("------Listing Multiple Records--------" );
+      List<Student> students = studentJDBCTemplate.listStudents();
+      for (Student record : students) {
+         System.out.print("ID : " + record.getId() );
+         System.out.print(", Name : " + record.getName() );
+         System.out.println(", Age : " + record.getAge());
+      }
+
+      System.out.println("----Updating Record with ID = 2 -----" );
+      studentJDBCTemplate.update(2, 20);
+
+      System.out.println("----Listing Record with ID = 2 -----" );
+      Student student = studentJDBCTemplate.getStudent(2);
+      System.out.print("ID : " + student.getId() );
+      System.out.print(", Name : " + student.getName() );
+      System.out.println(", Age : " + student.getAge());
+	  
+   }
+}
+
+
+
+
+
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd ">
+
+   <!-- Initialization for data source -->
+   <bean id="dataSource" 
+      class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+      <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+      <property name="url" value="jdbc:mysql://localhost:3306/TEST"/>
+      <property name="username" value="root"/>
+      <property name="password" value="shital@123"/>
+   </bean>
+
+   <!-- Definition for studentJDBCTemplate bean -->
+   <bean id="studentJDBCTemplate" 
+      class="com.training.StudentJDBCTemplate">
+      <property name="dataSource"  ref="dataSource" />    
+   </bean>
+      
+</beans>
+
+
+
+
+
+
+
+
+package com.training.org;
+
+import java.util.List;
+import javax.sql.DataSource;
+import org.springframework.jdbc.core.JdbcTemplate;
+
+public class StudentJDBCTemplate implements StudentDAO {
+   private DataSource dataSource;
+   private JdbcTemplate jdbcTemplateObject;
+   
+   public void setDataSource(DataSource dataSource) {
+      this.dataSource = dataSource;
+      this.jdbcTemplateObject = new JdbcTemplate(dataSource);
+   }
+
+   public void create(String name, Integer age) {
+      String SQL = "insert into Student (name, age) values (?, ?)";
+      
+      jdbcTemplateObject.update( SQL, name, age);
+      System.out.println("Created Record Name = " + name + " Age = " + age);
+      return;
+   }
+
+   public Student getStudent(Integer id) {
+      String SQL = "select * from Student where id = ?";
+      Student student = jdbcTemplateObject.queryForObject(SQL, 
+                        new Object[]{id}, new StudentMapper());
+      return student;
+   }
+
+   public List<Student> listStudents() {
+	      String SQL = "select * from Student";
+	      List <Student> students = jdbcTemplateObject.query(SQL, 
+	                                new StudentMapper());
+	      return students;
+	   }
+
+	   public void delete(Integer id){
+	      String SQL = "delete from Student where id = ?";
+	      jdbcTemplateObject.update(SQL, id);
+	      System.out.println("Deleted Record with ID = " + id );
+	      return;
+	   }
+
+	   public void update(Integer id, Integer age){
+	      String SQL = "update Student set age = ? where id = ?";
+	      jdbcTemplateObject.update(SQL, age, id);
+	      System.out.println("Updated Record with ID = " + id );
+	      return;
+	   }
+
+	}
+
+
+
+
+    
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import org.springframework.jdbc.core.RowMapper;
+
+public class StudentMapper implements RowMapper<Student> {
+   public Student mapRow(ResultSet rs, int rowNum) throws SQLException {
+      Student student = new Student();
+      student.setId(rs.getInt("id"));
+      student.setName(rs.getString("name"));
+      student.setAge(rs.getInt("age"));
+      return student;
+   }
+}
+
+
+
+
+
+
+
+public class Student {
+   private Integer age;
+   private String name;
+   private Integer id;
+
+   public void setAge(Integer age) {
+      this.age = age;
+   }
+   public Integer getAge() {
+      return age;
+   }
+
+   public void setName(String name) {
+      this.name = name;
+   }
+   public String getName() {
+      return name;
+   }
+
+   public void setId(Integer id) {
+      this.id = id;
+   }
+   public Integer getId() {
+      return id;
+   }
+}
+
+
+
+
+
+
+
+import java.util.List;
+import javax.sql.DataSource;
+
+public interface StudentDAO {
+   /** 
+    * This is the method to be used to initialize
+    * database resources ie. connection.
+    */
+   public void setDataSource(DataSource ds);
+   /** 
+    * This is the method to be used to create
+    * a record in the Student table.
+    */
+   public void create(String name, Integer age);
+   /** 
+    * This is the method to be used to list down
+    * a record from the Student table corresponding
+    * to a passed student id.
+    */
+   public Student getStudent(Integer id);
+   /** 
+    * This is the method to be used to list down
+    * all the records from the Student table.
+    */
+   public List<Student> listStudents();
+   /** 
+    * This is the method to be used to delete
+    * a record from the Student table corresponding
+    * to a passed student id.
+    */
+   public void delete(Integer id);
+   /** 
+    * This is the method to be used to update
+    * a record into the Student table.
+    */
+   public void update(Integer id, Integer age);
+}
+
+
+
+
+1	Create a project with a name SpringExample and create a package com.trainingpoint under the src folder in the created project.
+2	Add required Spring libraries using Add External JARs option as explained in the Spring Hello World Example chapter.
+3	Add Spring JDBC specific latest libraries mysql-connector-java.jar, org.springframework.jdbc.jar and org.springframework.transaction.jar in the project. You can download required libraries if you do not have them already.
+4	Create DAO interface StudentDAO and list down all the required methods. Though it is not required and you can directly write StudentJDBCTemplate class, but as a good practice, let's do it.
+5	Create other required Java classes Student, StudentMapper, StudentJDBCTemplate and MainApp under the com.training package.
+6	Make sure you already created Student table in TEST database. Also make sure your MySQL server is working fine and you have read/write access on the database using the give username and password.
+7	Create Beans configuration file Beans.xml under the src folder.
+8	The final step is to create the content of all the Java files and Bean Configuration file and run the application as explained below.
+
+
+
+
+
+
+
+
+String SQL = "select name from Student where id = ?";
+String name = jdbcTemplateObject.queryForObject(SQL, new Object[]{10}, String.class);
+Querying and returning an object:
+
+String SQL = "select * from Student where id = ?";
+Student student = jdbcTemplateObject.queryForObject(SQL, 
+                  new Object[]{10}, new StudentMapper());
+
+public class StudentMapper implements RowMapper<Student> {
+   public Student mapRow(ResultSet rs, int rowNum) throws SQLException {
+      Student student = new Student();
+      student.setID(rs.getInt("id"));
+      student.setName(rs.getString("name"));
+      student.setAge(rs.getInt("age"));
+      return student;
+   }
+}
+Querying and returning multiple objects:
+
+String SQL = "select * from Student";
+List<Student> students = jdbcTemplateObject.query(SQL,
+                         new StudentMapper());
+
+public class StudentMapper implements RowMapper<Student> {
+   public Student mapRow(ResultSet rs, int rowNum) throws SQLException {
+      Student student = new Student();
+      student.setID(rs.getInt("id"));
+      student.setName(rs.getString("name"));
+      student.setAge(rs.getInt("age"));
+      return student;
+   }
+}
+
+
+
+
+
+
+
+
+Executing SQL statements
+Let us see how we can perform CRUD (Create, Read, Update and Delete) operation on database tables using SQL and jdbcTemplate object.
+
+Querying for an integer:
+
+String SQL = "select count(*) from Student";
+int rowCount = jdbcTemplateObject.queryForInt( SQL );
+Querying for a long:
+
+String SQL = "select count(*) from Student";
+long rowCount = jdbcTemplateObject.queryForLong( SQL );
+A simple query using a bind variable:
+
+String SQL = "select age from Student where id = ?";
+int age = jdbcTemplateObject.queryForInt(SQL, new Object[]{10});
+
+
+
+
+
+
+DAO stands for data access object which is commonly used for database interaction. DAOs exist to provide a means to read and write data to the database and they should expose this functionality through an interface by which the rest of the application will access them.
+The Data Access Object (DAO) support in Spring makes it easy to work with data access technologies like JDBC, Hibernate, JPA or JDO in a consistent way.
+
+
+
+
+
+
+Let us create a database table Student in our database TEST. I assume you are working with MySQL database, if you work with any other database then you can change your DDL and SQL queries accordingly.
+
+CREATE TABLE Student(
+   ID   INT NOT NULL AUTO_INCREMENT,
+   NAME VARCHAR(20) NOT NULL,
+   AGE  INT NOT NULL,
+   PRIMARY KEY (ID)
+);
+Now we need to supply a DataSource to the JdbcTemplate so it can configure itself to get database access. You can configure the DataSource in the XML file with a piece of code as shown below:
+
+<bean id="dataSource"
+class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+   <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+   <property name="url" value="jdbc:mysql://localhost:3306/TEST"/>
+   <property name="username" value="root"/>
+   <property name="password" value="password"/>
+</bean>
+
+
+
+The JdbcTemplate class executes SQL queries, update statements and stored procedure calls, performs iteration over ResultSets and extraction of returned parameter values. It also catches JDBC exceptions and translates them to the generic, more informative, exception hierarchy defined in the org.springframework.dao package.
+Instances of the JdbcTemplate class are threadsafe once configured. So you can configure a single instance of a JdbcTemplate and then safely inject this shared reference into multiple DAOs.
+A common practice when using the JdbcTemplate class is to configure aDataSource in your Spring configuration file, and then dependency-inject that shared DataSource bean into your DAO classes, and the JdbcTemplate is created in the setter for the DataSource.
+
+
+
+
+While working with database using plain old JDBC, it becomes cumbersome to write unnecessary code to handle exceptions, opening and closing database connections etc. But Spring JDBC Framework takes care of all the low-level details starting from opening the connection, prepare and execute the SQL statement, process exceptions, handle transactions and finally close the connection.
+So what you have do is just define connection parameters and specify the SQL statement to be executed and do the required work for each iteration while fetching data from the database.
+Spring JDBC provides several approaches and correspondingly different classes to interface with the database. I'm going to take classic and the most popular approach which makes use of JdbcTemplate class of the framework. This is the central framework class that manages all the database communication and exception handling.
+

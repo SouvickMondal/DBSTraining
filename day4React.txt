@@ -1,0 +1,1790 @@
+1] Example
+
+import React, { Component } from 'react';
+
+class App extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      data: 'Jordan Belfort'
+    }
+  }
+  componentWillMount(){
+    console.log('First this called');
+  }
+
+  getData(){
+    setTimeout(() => {
+      console.log('Our data is fetched');
+      this.setState({
+        data: 'Hello WallStreet'
+      })
+    }, 1000)
+  }
+
+  componentDidMount(){
+    this.getData();
+  }
+
+  render() {
+    return(
+      <div>
+      {this.state.data}
+    </div>
+    )
+  }
+}
+
+export default App;
+
+
+
+2] Main.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './app/app.jsx';
+
+ReactDOM.render(<App />, document.getElementById('App'));
+
+
+
+import React from 'react';
+
+class Person extends React.Component {
+   constructor(props) {
+     super(props);
+     this.state = { mode: undefined };
+   }
+  
+   componentWillMount() {
+     var modeValue;
+     if (this.props.age > 70) {
+       modeValue = "old";
+     } else if (this.props.age < 18) {
+       modeValue = "young";
+     } else {
+       modeValue = "middle";
+     }
+     console.log(modeValue)
+     this.setState({ mode: modeValue });
+
+     
+   }
+  
+   render() {
+     return (
+       <div className={"person person-" + this.state.mode}>
+         {this.props.name} (age: {this.props.age})
+       </div>
+     );
+   }
+ }
+  
+ Person.defaultProps = { age: "unknown" };
+
+ export default Person;
+
+
+
+2] Main.js
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Person from './App.jsx';
+
+// ReactDOM.render(<App/>, document.getElementById('app'))
+
+ReactDOM.render(
+    <Person name="Donald Trump" age="72" />,
+    document.getElementById("person1")
+  );
+  ReactDOM.render(
+    <Person name="Ivanka Trump" age="36" />,
+    document.getElementById("person2")
+  );
+
+
+
+
+3] index.html
+
+<!DOCTYPE html>
+<html lang = "en">
+   <head>
+      <meta charset = "UTF-8">
+      <title>React App</title>
+   </head>
+
+   <body>
+       welcome to react application
+       <div id="person1"></div>
+       <div id="person2"></div>
+      <script src = "index.js"></script>
+   </body>
+
+</html>
+
+
+
+
+
+
+
+Example 2
+
+
+class NumberView extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentNumber: 1
+    };
+  }
+ 
+  nextValue() {
+    this.setState((prevState, props) => {
+      return {
+        currentNumber: prevState.currentNumber + 1
+      };
+    });
+  }
+ 
+  shouldComponentUpdate(props, nextState) {
+    // Odd Number
+    return nextState.currentNumber % 2 == 1;
+  }
+ 
+  render() {
+    return (
+      <div className="number-viewer">
+        <button onClick={() => this.nextValue()}>Next Value</button>
+        <p>Current Value: {this.state.currentNumber}</p>
+      </div>
+    );
+  }
+}
+ 
+// Render
+ReactDOM.render(<NumberView />, document.getElementById("numberview1"));
+
+
+
+
+
+2] HTML PAGE
+
+ <body>
+      <h1>shouldComponentUpdate():</h1>
+ 
+      <p>Show only odd numbers</p>
+      <div id="numberview1"></div>
+ 
+
+
+
+
+Example 3
+class RevenueView extends React.Component {
+  constructor(props) {
+    super(props);
+ 
+    this.state = {
+      year: 2018,
+      revenue: 1000,
+      growthRate: "Unknown"
+    };
+  }
+ 
+  nextYear() {
+    this.setState((prevState, props) => {
+      var randomRevenue = prevState.revenue * (1 + Math.random());
+      return {
+        year: prevState.year + 1,
+        revenue: randomRevenue
+      };
+    });
+  }
+ 
+  UNSAFE_componentWillUpdate(props, nextState) {
+    var rate = (nextState.revenue - this.state.revenue) / this.state.revenue;
+    nextState.growthRate = 100 * rate + " %";
+  }
+ 
+  render() {
+    return (
+      <div className="revenue-view">
+        <p>Year: {this.state.year}</p>
+        <p>Revenue: {this.state.revenue}</p>
+        <p>Growth Rate: {this.state.growthRate}</p>
+        <button onClick={() => this.nextYear()}>Next Year</button>
+      </div>
+    );
+  }
+}
+ 
+// Render
+ReactDOM.render(<RevenueView />, document.getElementById("revenueview1"));
+
+
+
+
+HTML PAGE
+
+style>
+         .revenue-view  {
+         border:1px solid #cbbfab;
+         padding: 5px;
+         margin: 5px;
+         }
+      </style>
+   </head>
+   <body>
+      <h3>UNSAFE_componentWillUpdate(props,nextState):</h3>
+ 
+      <div id="revenueview1"></div>
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+ReactDOM.render( < App4 / > , document.getElementById('app'));
+
+setTimeout(() => {
+    ReactDOM.unmountComponentAtNode(document.getElementById('app'));
+}, 10000);
+
+
+
+
+
+
+
+
+import React from 'react';
+class App extends React.Component {
+   constructor(props) {
+      super(props);
+	
+      this.state = {
+         data: 0
+      }
+
+      this.setNewNumber = this.setNewNumber.bind(this)
+   };
+
+   setNewNumber() {
+      this.setState({data: this.state.data + 1})
+   }
+
+   render() {
+      return (
+         <div>
+            <button onClick = {this.setNewNumber}>INCREMENT</button>
+            <Content myNumber = {this.state.data}></Content>
+         </div>
+      );
+   }
+}
+
+class Content extends React.Component {
+
+   componentWillMount() {
+      console.log('Component WILL MOUNT!')
+   }
+
+   componentDidMount() {
+      console.log('Component DID MOUNT!')
+   }
+
+   componentWillReceiveProps(newProps) {    
+      console.log('Component WILL RECIEVE PROPS!')
+   }
+
+   shouldComponentUpdate(newProps, newState) {
+      return true;
+   }
+
+   componentWillUpdate(nextProps, nextState) {
+      console.log('Component WILL UPDATE!');
+   }
+
+   componentDidUpdate(prevProps, prevState) {
+      console.log('Component DID UPDATE!')
+   }
+
+   componentWillUnmount() {
+      console.log('Component WILL UNMOUNT!')
+   }
+	
+   render() {
+      return (
+         <div>
+            <h3>{this.props.myNumber}</h3>
+         </div>
+      );
+   }
+}
+
+export default App;
+
+
+
+
+
+
+
+
+There are just a few sce­nar­ios that require you to be aware of the life­cy­cle meth­ods
+1. Ini­tial Ren­der
+2. Props Change
+3. State Change
+4. Com­po­nent Unmount
+
+
+
+import React, {Component} from 'react'
+class Topic extends Component {
+   render{
+     return(
+      <div>
+        {this.props.name}
+      </div>
+    )
+   }
+}
+
+
+
+
+
+import React, {Component} from 'react'
+class Welcome extends Component {
+   render{
+     return(
+      <div>
+        <p> Welcome to React, today you will learn: </p>
+        <Topic name="Props"/>
+        <Topic name="State"/>
+      </div>
+    )
+   }
+}
+
+
+
+
+State
+class Counter extends Component{
+  
+  constructor(props){
+    super(props);
+    this.state = {counter: 0}
+  }
+  render(){
+    return(
+      <p>{this.state.counter}</p>
+  )
+}
+
+
+
+
+class Counter extends Component{
+  
+  constructor(props){
+    super(props);
+    this.state = {counter: 0}
+    this.increment = this.increment.bind(this);
+  }
+  increment(){
+    this.setState({counter: this.state.counter + 1})
+  }
+render(){
+    return(
+      <button onClick={this.increment}>Like</button>
+      <p>{this.state.counter}</p>
+  )
+}
+
+
+
+
+
+https://www.robinwieruch.de/react-pass-props-to-component/
+What are Props in React?
+
+
+import React, { Component } from 'react';
+
+class App extends Component {
+  render() {
+    const greeting = 'Welcome to React';
+
+    return (
+      <div>
+        <h1>{greeting}</h1>
+      </div>
+    );
+  }
+}
+
+export default App;
+
+
+
+2]
+
+import React, { Component } from 'react';
+
+class App extends Component {
+  render() {
+    return (
+      <div>
+        <Greeting />
+      </div>
+    );
+  }
+}
+
+class Greeting extends Component {
+  render() {
+    const greeting = 'Welcome to React';
+
+    return <h1>{greeting}</h1>;
+  }
+}
+
+export default App;
+
+
+3] 
+
+import React, { Component } from 'react';
+
+class App extends Component {
+  render() {
+    const greeting = 'Welcome to React';
+
+    return (
+      <div>
+        <Greeting greeting={greeting} />
+      </div>
+    );
+  }
+}
+
+class Greeting extends Component {
+  render() {
+    return <h1>{this.props.greeting}</h1>;
+  }
+}
+
+export default App;
+
+4] 
+
+import React, { Component } from 'react';
+
+class App extends Component {
+  render() {
+    const greeting = 'Welcome to React';
+
+    return (
+      <div>
+        <Greeting greeting={greeting} />
+      </div>
+    );
+  }
+}
+
+const Greeting = props => <h1>{props.greeting}</h1>;
+
+export default App;
+
+
+5] 
+
+
+import React, { Component } from 'react';
+
+class App extends Component {
+  render() {
+    return (
+      <div>
+        <Greeting greeting="Welcome to React" />
+      </div>
+    );
+  }
+}
+
+const Greeting = ({ greeting }) => <h1>{greeting}</h1>;
+
+export default App;
+
+6] 
+
+import React, { Component } from 'react';
+
+class App extends Component {
+  render() {
+    return (
+      <div>
+        <Greeting greeting={{ text: 'Welcome to React' }} />
+      </div>
+    );
+  }
+}
+
+const Greeting = ({ greeting }) => <h1>{greeting.text}</h1>;
+
+export default App;
+
+
+
+React Props vs. State
+
+
+import React, { Component } from 'react';
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isShow: true,
+    };
+  }
+
+  toggleShow = () => {
+    this.setState(state => ({ isShow: !state.isShow }));
+  };
+
+  render() {
+    return (
+      <div>
+        {this.state.isShow ? <Greeting greeting={greeting} /> : null}
+
+        <button onClick={this.toggleShow} type="button">
+          Toggle Show
+        </button>
+      </div>
+    );
+  }
+}
+
+const Greeting = ({ greeting }) => <h1>{greeting}</h1>;
+
+export default App;
+
+
+
+2] 
+
+import React, { Component } from 'react';
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isShow: true,
+    };
+  }
+
+  toggleShow = () => {
+    this.setState(state => ({ isShow: !state.isShow }));
+  };
+
+  render() {
+    const greeting = 'Welcome to React';
+
+    return (
+      <div>
+        <Greeting greeting={greeting} isShow={this.state.isShow} />
+
+        <button onClick={this.toggleShow} type="button">
+          Toggle Show
+        </button>
+      </div>
+    );
+  }
+}
+
+const Greeting = ({ greeting, isShow }) =>
+  isShow ? <h1>{greeting}</h1> : null;
+
+export default App;
+
+
+How to pass Props from child to parent Component?
+
+
+
+
+import React, { Component } from 'react';
+
+class App extends Component {
+  render() {
+    const greeting = 'Welcome to React';
+
+    return (
+      <div>
+        {isShow ? <Greeting greeting={greeting} /> : null}
+
+        <Button />
+      </div>
+    );
+  }
+}
+
+class Button extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isShow: true,
+    };
+  }
+
+  toggleShow = () => {
+    this.setState(state => ({ isShow: !state.isShow }));
+  };
+
+  render() {
+    return (
+      <button onClick={this.toggleShow} type="button">
+        Toggle Show
+      </button>
+    );
+  }
+}
+
+const Greeting = ({ greeting }) => <h1>{greeting}</h1>;
+
+export default App;
+
+
+
+2] 
+
+import React, { Component } from 'react';
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isShow: true,
+    };
+  }
+
+  toggleShow = () => {
+    this.setState(state => ({ isShow: !state.isShow }));
+  };
+
+  render() {
+    const greeting = 'Welcome to React';
+
+    return (
+      <div>
+        {this.state.isShow ? <Greeting greeting={greeting} /> : null}
+
+        <Button onClick={this.toggleShow} />
+      </div>
+    );
+  }
+}
+
+const Button = ({ onClick }) => (
+  <button onClick={onClick} type="button">
+    Toggle Show
+  </button>
+);
+
+const Greeting = ({ greeting }) => <h1>{greeting}</h1>;
+
+export default App;
+
+
+3] 
+
+import React, { Component } from 'react';
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isShow: true,
+    };
+  }
+
+  toggleShow = () => {
+    this.setState(state => ({ isShow: !state.isShow }));
+  };
+
+  render() {
+    const greeting = 'Welcome to React';
+
+    return (
+      <div>
+        <Greeting greeting={greeting} isShow={this.state.isShow} />
+
+        <Button onClick={this.toggleShow} />
+      </div>
+    );
+  }
+}
+
+const Button = ({ onClick }) => (
+  <button onClick={onClick} type="button">
+    Toggle Show
+  </button>
+);
+
+const Greeting = ({ greeting, isShow }) =>
+  isShow ? <h1>{greeting}</h1> : null;
+
+export default App;
+
+
+Props can be state, props, or derived properties
+
+
+import React, { Component } from 'react';
+
+class App extends Component {
+  render() {
+    const greeting = {
+      subject: 'React',
+      description: 'Your component library for ...',
+    };
+
+    return (
+      <div>
+        <Greeting greeting={greeting} />
+      </div>
+    );
+  }
+}
+
+const Greeting = ({ greeting }) =>
+  <div>
+    <Title title={`Welcome to ${greeting.subject}`} />
+    <Description description={greeting.description} />
+  </div>
+
+const Title = ({ title }) =>
+  <h1>{title}</h1>;
+
+const Description = ({ description }) =>
+  <p>{description}</p>;
+
+export default App;
+
+
+
+React Props and Code Style
+
+import React, { Component } from 'react';
+import logo from './logo.svg'
+
+class App extends Component {
+  render() {
+    const greeting = {
+      subject: 'React',
+      description: 'Your component library for ...',
+    };
+
+    return (
+      <div>
+        <Greeting subject={greeting.subject} description={greeting.description} logo={logo} />
+      </div>
+    );
+  }
+}
+
+const Greeting = ({ subject, description, logo }) =>
+  ...
+So how to overcome this bad code style which is hard to read and maintain? One way would be passing the props with multiple indented lines to a component. The destructuring could follow the same rules:
+
+import React, { Component } from 'react';
+import logo from './logo.svg'
+
+class App extends Component {
+  render() {
+    const greeting = {
+      subject: 'React',
+      description: 'Your component library for ...',
+    };
+
+    return (
+      <div>
+        <Greeting
+          subject={greeting.subject}
+          description={greeting.description}
+          logo={logo}
+        />
+      </div>
+    );
+  }
+}
+
+const Greeting = ({
+  subject,
+  description,
+  logo,
+}) =>
+  ...
+
+
+
+React ...props syntax
+
+
+class App extends Component {
+  render() {
+    const greeting = {
+      subject: 'React',
+      description: 'Your component library for ...',
+    };
+
+    return (
+      <div>
+        <Greeting {...greeting} />
+      </div>
+    );
+  }
+}
+
+const Greeting = ({ subject, description }) => (
+  <div>
+    <Title title={`Welcome to ${subject}`} />
+    <Description description={description} />
+  </div>
+);
+
+const Title = ({ title }) => <h1>{title}</h1>;
+
+const Description = ({ description }) => <p>{description}</p>;
+
+
+
+
+class App extends Component {
+  render() {
+    const greeting = {
+      subject: 'React',
+      description: 'Your component library for ...',
+    };
+
+    return (
+      <div>
+        <Greeting {...greeting} />
+      </div>
+    );
+  }
+}
+
+const Greeting = ({ subject, ...other }) => (
+  <div>
+    <Title title={`Welcome to ${subject}`} />
+    <Description {...other} />
+  </div>
+);
+
+const Title = ({ title }) => <h1>{title}</h1>;
+
+const Description = ({ description }) => <p>{description}</p>;
+
+
+
+How to pass Components as Props?
+
+
+const User = ({ user }) => (
+  <Profile user={user}>
+    <AvatarRound user={user} />
+  </Profile>
+);
+
+const Profile = ({ user, children }) => (
+  <div className="profile">
+    <div>{children}</div>
+    <div>
+      <p>{user.name}</p>
+    </div>
+  </div>
+);
+
+const AvatarRound = ({ user }) => (
+  <img className="round" alt="avatar" src={user.avatarUrl} />
+);
+
+
+
+
+
+
+const User = ({ user }) => (
+  <Profile
+    user={user}
+    avatar={<AvatarRound user={user} />}
+    biography={<BiographyFat user={user} />}
+  />
+);
+
+const Profile = ({ user, avatar, biography }) => (
+  <div className="profile">
+    <div>{avatar}</div>
+    <div>
+      <p>{user.name}</p>
+      {biography}
+    </div>
+  </div>
+);
+
+const AvatarRound = ({ user }) => (
+  <img className="round" alt="avatar" src={user.avatarUrl} />
+);
+
+const BiographyFat = ({ user }) => (
+  <p className="fat">{user.biography}</p>
+);
+
+
+
+
+const AvatarSquare = ({ user }) => (
+  <img className="square" alt="avatar" src={user.avatarUrl} />
+);
+
+const BiographyItalic = ({ user }) => (
+  <p className="italic">{user.biography}</p>
+);
+
+
+
+
+Children as a Function
+
+
+
+const App = () => (
+  <div>
+    <h1>US Dollar to Euro:</h1>
+    <Amount render={amount => <Euro amount={amount} />} />
+
+    <h1>US Dollar to Pound:</h1>
+    <Amount render={amount => <Pound amount={amount} />} />
+  </div>
+);
+
+class Amount extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      amount: 0,
+    };
+  }
+
+  onIncrement = () => {
+    this.setState(state => ({ amount: state.amount + 1 }));
+  };
+
+  onDecrement = () => {
+    this.setState(state => ({ amount: state.amount - 1 }));
+  };
+
+  render() {
+    return (
+      <div>
+        <button type="button" onClick={this.onIncrement}>
+          +
+        </button>
+        <button type="button" onClick={this.onDecrement}>
+          -
+        </button>
+
+        <p>US Dollar: {this.state.amount}</p>
+
+        {this.props.render(this.state.amount)}
+      </div>
+    );
+  }
+}
+
+const Euro = ({ amount }) => <p>Euro: {amount * 0.86}</p>;
+
+const Pound = ({ amount }) => <p>Pound: {amount * 0.76}</p>;
+
+
+
+
+
+const App = () => (
+  <div>
+    <h1>US Dollar to Euro:</h1>
+    <Amount>{amount => <Euro amount={amount} />}</Amount>
+
+    <h1>US Dollar to Pound:</h1>
+    <Amount>{amount => <Pound amount={amount} />}</Amount>
+  </div>
+);
+
+class Amount extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      amount: 0,
+    };
+  }
+
+  onIncrement = () => {
+    this.setState(state => ({ amount: state.amount + 1 }));
+  };
+
+  onDecrement = () => {
+    this.setState(state => ({ amount: state.amount - 1 }));
+  };
+
+  render() {
+    return (
+      <div>
+        <button type="button" onClick={this.onIncrement}>
+          +
+        </button>
+        <button type="button" onClick={this.onDecrement}>
+          -
+        </button>
+
+        <p>US Dollar: {this.state.amount}</p>
+
+        {this.props.children(this.state.amount)}
+      </div>
+    );
+  }
+}
+
+const Euro = ({ amount }) => <p>Euro: {amount * 0.86}</p>;
+
+const Pound = ({ amount }) => <p>Pound: {amount * 0.76}</p>;
+
+
+
+To get a clear idea of the lifecycle we will need to differentiate between the initial creation phase, where the component is created, and state and props changes triggered updates as well as the component unmoutings phase.
+
+
+
+
+
+1] Convert this function example with class using state 
+2] Take array of Employees and with features to add new records and display all the records in table format using class and state
+
+
+
+
+
+
+
+import React from 'react'
+const names=['EShan','Tanish','James','Paul','George','Esha'];
+const people=[
+    {
+        name:"Eshan",
+        age:10
+    },
+    {
+        name:"Tanish",
+        age:20
+    },
+    {
+        name:"Manish",
+        age:30
+    },
+    {
+        name:"CHiku",
+        age:40
+    }
+]
+function App3(){
+    return (
+        <div>
+            {/* {
+            names.filter(name=>name.includes('T')).map(filteredName=>(
+                <li>
+                    {filteredName}
+                </li>    
+            )) */}
+            
+            {people.filter(person=>person.age>=30).map(filteredPerson=>(
+                <li>
+                    {filteredPerson.name}
+                </li>
+            ))}
+            
+            
+            
+            
+
+        </div>
+    )
+}
+
+export default App3;
+        
+        
+        
+        
+        
+
+
+import React from 'react'
+const names=['EShan','Tanish','James','Paul','George','Esha'];
+
+function App3(){
+    return (
+        <div>
+            {
+            names.filter(name=>name.includes('E')).map(filteredName=>(
+                <li>
+                    {filteredName}
+                </li>    
+            ))
+            
+            }
+
+        </div>
+    )
+}
+
+export default App3;
+
+
+
+
+
+
+
+
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App2 from './App2.jsx'
+ReactDOM.render( < App2 / > , document.getElementById("app")); 
+     
+    
+    
+
+
+import React from 'react';
+export default class App2 extends React.Component{
+    constructor(props){
+        super(props);
+        this.state={
+            inputValue:'',
+            items:[],
+        }
+    }
+
+    onInputChange(e){
+        this.setState({
+            inputValue:e.target.value
+        });
+    }
+
+    addItems(){
+        let items=this.state.items;
+        items.push(this.state.inputValue);
+        this.setState({
+            items
+        })
+    }
+
+    listItems(){
+        let items=this.state.items;
+        console.log(items)
+        return(
+            <ul>
+            {
+                items.map((val,index)=>{
+                    return(
+                        <li key={index}>
+                            {val}
+                        </li>
+                    );
+                })
+            }
+            </ul>
+        )
+    }
+
+    render(){
+        return(
+        <div>
+            <input type="text" onChange={(e)=>this.onInputChange(e)}/>
+            <button onClick={()=>this.addItems()}> Add Items</button>
+            {this.listItems()}
+        </div>)
+    };
+}
+
+
+
+
+
+
+
+
+
+
+
+import React from "react"
+
+class Technologies extends React.Component{
+    constructor(props){
+        super(props)
+        this.state={
+            tech:[]
+        }
+        this.selectTech=this.selectTech.bind(this)
+    }
+    selectTech(e){
+        if(e.target.checked){
+            this.setState({
+                tech:[...this.state.tech,e.target.value]
+            },()=>{console.log(this.state.tech)
+        });
+    }
+    }
+    render(){
+        return(
+            <div>
+                <form>
+                    <input type="checkbox" id="cpp" name="cpp" onClick={this.selectTech}/> C++
+                    <input type="checkbox" id="java" name="java" onClick={this.selectTech}/>JAVA
+                    <input type="checkbox" id="ds" name="ds" onClick={this.selectTech}/>DS
+
+
+                </form>
+
+            </div>
+        );
+    }
+}
+
+
+export default Technologies;
+
+
+
+
+
+
+
+
+import React from "react"
+class App extends React.Component{
+    render(){
+        return(
+            <div>
+                        <td><h1>{this.props.id}</h1></td>
+                        <td><h1>{this.props.name}</h1></td>
+                        <td><h1>{this.props.salary}</h1></td>
+
+                
+           </div>
+        );
+    }
+}
+
+export default App;
+
+
+
+
+
+
+import React from "react"
+import Employee from './Employee.jsx'
+class App extends React.Component{
+    constructor(props){
+        super(props);
+        this.state={
+            id:101,
+            name:"Eshan",
+            salary:10000,
+            date:new Date()
+        }
+    }
+    render(){
+        return(
+            <div>
+               <h1> {this.state.date.toLocaleTimeString()}</h1>
+            <table border="5px">
+                
+                <tr><Employee id={this.state.id} name={this.state.name} salary={this.state.salary}></Employee></tr>
+                <tr><Employee id="102" name="Manish" salary="200000"></Employee></tr>
+                <tr><Employee id="103" name="Tanish" salary="300000"></Employee></tr>
+            </table>
+
+           
+           </div>
+        );
+    }
+}
+
+export default App;
+
+
+
+
+
+
+import React from "react"
+
+function DemoComponent(props){ 
+    return( 
+        <div> 
+           <h2>Hello {props.user}</h2> 
+         </div> 
+    ); 
+} 
+class Greeting extends React.Component{
+    render(){
+        return(
+            <div>
+                   <h1> <mark>{this.props.message}</mark></h1>
+                   <DemoComponent user = "Eshan" />
+            </div>
+        );
+    }
+}
+
+
+export default Greeting;
+
+
+
+
+
+
+
+import React from "react"
+class Greeting extends React.Component{
+    render(){
+        return(
+            <div>
+                   <h1> <mark>{this.props.message}</mark></h1>
+
+                
+           </div>
+        );
+    }
+}
+
+export default Greeting;
+
+
+
+
+
+
+
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './App.jsx'
+import Greeting from './Greeting.jsx'
+ReactDOM.render( < App / > , document.getElementById("app"));
+
+setInterval(function() {
+    var messages = ['Hello, World', 'Hello, Planet', 'Hello, Universe'];
+    var randomMessage = messages[Math.floor((Math.random() * 3))];
+    ReactDOM.render( <
+        Greeting message = { randomMessage }/>,
+        document.getElementById('greeting-div')
+    );
+}, 2000);
+
+
+
+
+
+
+
+React relies on unidirectional data flow. This means that data flow occurs in only one direction i.e. from parent to child via properties. These properties are passed to child components via attributes in JSX. Inside the component you can access the passed properties via the props property of the component. When the properties change, React makes sure to re-render your component so that your UI is up-to-date with the data model. Let’s modify the previous snippet to show a random message every two seconds.
+
+
+
+
+
+import React from 'react';
+ 
+class App3 extends React.Component {
+  constructor(props){
+      super(props)
+     }
+  handleClick() {
+   alert(this); // null
+  }
+  render() {
+    return (
+      <div onClick={this.handleClick}>CLICK</div>
+    );
+  }
+}
+ 
+export default App3;
+
+
+
+
+
+
+
+Using React.createClass will automatically bind this values correctly for us, but changes when using ES6 classes affect this.
+React.createClass
+Note the onClick declaration with this.handleClick bound. When this method gets called React will apply the right execution context to handleClick.
+import React from 'react';
+ 
+const Contacts = React.createClass({
+  handleClick() {
+    console.log(this); // React Component instance
+  },
+  render() {
+    return (
+      <div onClick={this.handleClick}></div>
+    );
+  }
+});
+ 
+export default Contacts;
+
+
+
+
+React.Component
+Let’s take the above React.createClass definition and convert it to use an ES6 class.
+import React from 'react';
+ 
+class Contacts extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div></div>
+    );
+  }
+}
+ 
+export default Contacts;
+
+
+
+
+React.createClass
+Here we have a const with a React class assigned, with the important render function following on to complete a typical base component definition.
+import React from 'react';
+ 
+const Contacts = React.createClass({
+  render() {
+    return (
+      <div></div>
+    );
+  }
+});
+ 
+export default Contacts;
+
+
+
+
+
+
+
+React.createClass versus extends React.Component
+
+Two ways to do the same thing. Almost. React traditionally provided theReact.createClass method to create component classes, and released a small syntax sugar update to allow for better use with ES6 modules by extends React.Component, which extends the Component class instead of calling createClass.
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript" src="hello.js"></script>
+</head>
+<body>
+First line
+
+<div id="hello"></div>
+Last Line
+</body>
+
+
+</html>
+
+
+
+jsx --executable web --output hello.js hello.jsx
+
+
+import "js/web.jsx";
+
+class _Main {
+    static function main(args : string[]) : void {
+        var document = dom.window.document;
+        var text = document.createTextNode("Hello, world!");
+        document.getElementById("hello").appendChild(text);
+    }
+}
+
+
+
+
+
+
+interface Flyable {
+    abstract function fly() : void;
+}
+
+abstract class Animal {
+    function eat() : void {
+      log "An animal is eating!";
+    }
+}
+
+class Bat extends Animal implements Flyable {
+    override function fly() : void {
+        log "A bat is flying!";
+    }
+}
+
+abstract class Insect {
+}
+
+class Bee extends Insect implements Flyable {
+    override function fly() : void {
+        log "A bee is flying!";
+    }
+}
+
+
+
+
+
+class _Main {
+
+    static function main(args : string[]) : void {
+        // fo bar
+        var bat = new Bat();
+
+        var animal : Animal = bat; // OK. A bat is an animal.
+        animal.eat();
+
+        var flyable : Flyable = bat; // OK. A bat can fly
+        flyable.fly();
+
+        // for Bee
+        var bee = new Bee();
+
+        flyable = bee; // A bee is also flyable
+        flyable.fly();
+    }
+}
+
+
+
+•	try-catch-finally statement
+•	try {
+•	    ...
+•	} catch (e : TypeError) {
+•	    // got TypeError
+•	} catch (e : Error) {
+•	    // got Error, which is not TypeError
+•	} catch (e : variant) {
+    
+    
+•	    // applications may throw any kind of value
+•	} finally {
+•	    ...
+}
+
+
+
+
+Nullable type is a meta type which indicates a value may be null. It is prohibited to assign null to the primitive types (note: Object types are nullable by default). Nullable types should instead be used for such purposes.
+var s1 : string;
+s1 = "abc";       // ok
+s1 = null;        // compile error!  cannot assign null to string
+
+var s2 : Nullable.<string>;
+s2 = "abc";       // ok
+s2 = null;        // ok
+
+
+
+
+Variant type, which means "no static type information," is useful for interacting with existing JavaScript APIs. Some JavaScript libraries may return a variant value, which type cannot be determined at compile time. All you can do on variant values is to check equality of a variant value to another variant value. You have to cast it to another type before doing anything else on the value.
+
+function guessTheType(v : variant) : void {
+    if (typeof v == "string") {
+        log "v is string and the value is:" + v as string;
+    } else {
+        log "v is not string";
+    }
+}
+
+
+
+
+
+
+Array and Map types can also be instatiated by using their initializer expressions.
+var a1 = [] : Array.<string>;  // a1 is Array.<string>, and is empty
+var a2 = [ 1, 2, 3 ];          // a2 is Array.<number> with three elements
+
+var m1 = {} : Map.<number>;    // m1 is Map.<number>
+var m2 = {                     // m2 is Map.<string>
+  en: "Good morning",
+  de: "Guten Morgen",
+  ja: “Have a nice day"};
+
+
+          
+          
+
+Object types are types of values to hold reference to objects - which are instances of classes. For example, functions, string[] (array of strings), Date are all object types. Whether they are mutable or not depends on the definition of each class.
+Most of the objects (values of object types) are constructed using the new operator.
+
+var d = new Date();            // instantiate an object of class Date
+var a = new Array.<string>();  // instantiate an array of string
+var m = new Map.<number>();    // instantiate an associative map of strings to numbers
+
+
+
+
+
+
+Basic type concept will be described in this section. 
+Primitive types, 
+object types, 
+variant type, and 
+Nullable types exist in JSX.
+
+Pritimive Types
+There are three pritimive types in JSX: string, number, and boolean. The three are non-nullable, immutable types. The code snippet below declares three variables s, n, b with their repective types, annocated to the right of the name of the variables using the : mark.
+var s : string;
+var n : number;
+var b : boolean;
+
+
+    
+    
+    
+
+
+class Point {
+    var x = 0;
+    var y = 0;
+    function constructor() {
+    	log("defult");
+    }
+    function constructor(x : number, y : number) {
+    	log("x y");
+        	this.set(x, y);
+    }
+    function constructor(other : Point) {
+    	log("other");
+	this.set(other);
+    }
+   function set(x : number, y : number) : void {
+	this.x = x;
+	this.y = y;
+    }
+    function set(other : Point) : void {
+	this.set(other.x, other.y);
+    }
+    function show():void{
+    	log(this.x);
+    	log(this.y);
+    }
+}
+
+
+class _Main{
+	static function main(args : string[]) : void {
+			var p=new Point();
+			p.set(10,20);
+			p.show();
+	}
+}
+
+
+
+class _Main{
+	static function main(args:string[]):void{
+		log "Hello World from jsx";
+	}
+}
+
+
+
+
+JSX is faster because it performs optimization while compiling code to JavaScript.
+It is also type-safe and most of the errors can be caught during compilation.
+JSX makes it easier and faster to write templates if you are familiar with HTML.
+
+
+
+
+
+JSX [ JavaScript syntax extension ]
+
+
+JSX is a preprocessor step that adds XML syntax to JavaScript. You can definitely use React without JSX but JSX makes React a lot more elegant.
+Just like XML, JSX tags have a tag name, attributes, and children. If an attribute value is enclosed in quotes, the value is a string. Otherwise, wrap the value in braces and the value is the enclosed JavaScript expression.
+
+
+
+
+
+
+
+https://www.digitalocean.com/community/tutorials/how-to-create-multistep-forms-with-react-and-semantic-ui
+    
+    
+    
+
+"scripts": {
+        "start": "webpack-dev-server --hot"
+    },
+    "author": "SBM",
+    "license": "ISC",
+    "dependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-core": "^6.26.3",
+        "babel-loader": "^7.1.5",
+        "babel-preset-es2015": "^6.24.1",
+        "babel-preset-react": "^6.24.1",
+        "react": "^16.4.1",
+        "react-dom": "^16.4.1",
+        "webpack": "^4.16.1",
+        "webpack-cli": "^3.1.0",
+        "webpack-dev-server": "^3.1.4"
+    }

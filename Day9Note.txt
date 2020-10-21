@@ -1,0 +1,674 @@
+https://gofile.io/d/azY1od
+    
+    
+    
+    
+
+
+https://gofile.io/d/hCOXZf
+    
+    
+    
+    
+    
+    
+    
+
+
+import React from "react";
+import './style/app.css'
+import './style/header.css'
+import { stockData } from "./model/data";
+  export const Stocks = () => {
+  return (
+    <p>
+      <HomePageHeader />
+      <div>
+        {stockData.map((data, key) => {
+          return (
+            <div key={key}>
+              <Stock
+                key={key}
+                company={data.company}
+                ticker={data.ticker}
+                stockPrice={data.stockPrice}
+                timeElapsed={data.timeElapsed}
+              />
+            </div>
+          );
+        })}
+      </div>
+    </p>
+  );
+};
+
+const HomePageHeader = () => {
+  return (
+    <details>
+                  <summary> Details </summary>
+                  <p>PARA</p>
+              </details>
+  );
+};
+
+const Stock = ({ company, ticker, stockPrice, timeElapsed }) => {
+  if (!company) return <div />;
+  return (
+    <details>
+      <summary>Details</summary>
+    <table>
+      <tbody>
+        <tr>
+          <td>
+            <h5>{company}</h5>
+          </td>
+          <td>
+            <h5>{ticker}</h5>
+          </td>
+          <td>
+            <h4>{stockPrice}</h4>
+          </td>
+          <td>
+            <p>{timeElapsed}</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    </details>
+  );
+};
+
+
+
+
+
+
+
+
+
+
+
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+summary::after {
+    content: "+";
+    color: royalblue;
+    float: left;
+    font-size: 1.5em;
+    font-weight: bold;
+    marker: -5px 5px 0 0;
+    padding: 0;
+    text-align: center;
+    width: 20px;
+}
+
+details[open] summary:after {
+    content: "-";
+}
+
+
+/* .header::-webkit-details-marker {
+    color: indigo;
+    background-color: green;
+}
+
+header[open] header::-webkit-full-screen {
+    color: lightblue;
+    background-color: red;
+    outline: 2px solid green;
+} */
+        
+        
+        
+        
+        
+        
+        
+        
+
+
+
+table {
+    display: flex;
+    justify-content: center;
+    background-color: grays;
+    border: 1px solid orange
+}
+
+td {
+    border: 1px solid gray;
+    width: 30em;
+}
+
+
+
+
+
+
+table {
+    display: flex;
+    justify-content: center;
+    background-color: grays;
+    border: 1px solid orange
+}
+
+td {
+    border: 1px solid gray;
+    width: 30em;
+}
+
+
+
+
+
+
+export const stockData = [{
+        company: "Twitter Inc",
+        ticker: "TWTR",
+        stockPrice: "22.76 USD",
+        timeElapsed: "5 sec ago",
+    },
+    {
+        company: "Square Inc",
+        ticker: "SQ",
+        stockPrice: "45.28 USD",
+        timeElapsed: "10 sec ago",
+    },
+    {
+        company: "Shopify Inc",
+        ticker: "SHOP",
+        stockPrice: "341.79 USD",
+        timeElapsed: "3 sec ago",
+    },
+    {
+        company: "Sunrun Inc",
+        ticker: "RUN",
+        stockPrice: "9.87 USD",
+        timeElapsed: "4 sec ago",
+    },
+    {
+        company: "Adobe Inc",
+        ticker: "ADBE",
+        stockPrice: "300.99 USD",
+        timeElapsed: "10 sec ago",
+    },
+    {
+        company: "HubSpot Inc",
+        ticker: "HUBS",
+        stockPrice: "115.22 USD",
+        timeElapsed: "12 sec ago",
+    },
+];
+
+
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './App.jsx'
+ReactDOM.render( < App / > ,
+    document.getElementById("example")
+
+               
+               );
+
+
+
+
+
+//Stocks.jsx
+import React from "react";
+
+import { stockData } from "./model/data";
+
+export const Stocks = () => {
+  return (
+    <p>
+      <HomePageHeader />
+      <div>
+        {stockData.map((data, key) => {
+          return (
+            <div key={key}>
+              <Stock
+                key={key}
+                company={data.company}
+                ticker={data.ticker}
+                stockPrice={data.stockPrice}
+                timeElapsed={data.timeElapsed}
+              />
+            </div>
+          );
+        })}
+      </div>
+    </p>
+  );
+};
+
+const HomePageHeader = () => {
+  return (
+    <header className="header">
+      <h2>Your Stock Tracker</h2>
+    </header>
+  );
+};
+
+const Stock = ({ company, ticker, stockPrice, timeElapsed }) => {
+  if (!company) return <div />;
+  return (
+    <table>
+      <tbody>
+        <tr>
+          <td>
+            <h5>{company}</h5>
+          </td>
+          <td>
+            <h5>{ticker}</h5>
+          </td>
+          <td>
+            <h4>{stockPrice}</h4>
+          </td>
+          <td>
+            <p>{timeElapsed}</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  );
+};
+
+
+
+
+
+
+
+
+
+
+import React from 'react'
+
+const HomePageHeader=()=>{
+    return(
+
+    <div>Home Page Header Part</div>
+    )
+}
+
+export default HomePageHeader
+
+
+import React from "react";
+import { Stocks } from "./Stocks.jsx";
+
+function App() {
+  return (
+    <div className="App">
+      <Stocks />
+    </div>
+  );
+}
+
+export default App;
+
+
+
+
+
+
+
+const path = require('path');
+
+var config = {
+    entry: './main.js',
+
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'index.js',
+    },
+    devServer: {
+        inline: true,
+        port: 3000
+    },
+
+    module: {
+        rules: [{
+                test: /\.jsx?$/,
+                exclude: /node_modules/,
+                loader: 'babel-loader',
+
+                query: {
+                    presets: ['es2015', 'react']
+                }
+            }, {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            },
+            {
+                test: /\.html$/,
+                use: ["html-loader?config=otherHtmlLoaderConfig"]
+            },
+            {
+                test: /\.ts$/,
+                use: ["ts-loader"]
+            },
+            {
+                test: /\.json$/,
+                loader: "json-loader"
+            }
+        ],
+
+
+    }
+}
+module.exports = config;
+
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './Greeting.jsx'
+ReactDOM.render( < App / > ,
+    document.getElementById("example")
+);
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+    <title>React Router Tutorial</title>
+</head>
+
+<body>
+
+    <div id="example"></div>
+    <script src="index.js"></script>
+
+
+</body>
+
+</html>
+
+
+
+
+import React from 'react'
+
+import {stockData} from './model/data'
+
+function App(){
+    return(
+        <div>
+           {
+               stockData.map((data,key)=>{
+                   return(<div key={key}>
+                        {data.company}+","+{data.stockPrice}
+
+                   </div>)
+               })
+           }
+        </div>
+    )
+}
+
+export default App;
+
+
+
+// var Greeter = require('./model/records.json');
+
+// module.exports = function() {
+//   var greet = document.createElement('div');
+//   greet.textContent = config.greetText;
+//   return greet;
+// };
+
+
+
+
+export const stockData = [{
+        company: "TCS",
+        stockPrice: "2700",
+    },
+    {
+        company: "Infosys",
+        stockPrice: "1010",
+    },
+    {
+        company: "Wipro",
+        stockPrice: "340",
+    },
+    {
+        company: "HCTTech",
+        stockPrice: "890",
+    },
+
+
+]
+
+
+
+
+
+
+
+
+
+
+{
+    "name": "my-app",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "start": "webpack-dev-server --hot"
+    },
+    "dependencies": {
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1",
+        "react-scripts": "3.4.3",
+        "babel-cli": "^6.26.0",
+        "babel-core": "^6.26.3",
+        "babel-loader": "^7.1.5",
+        "babel-preset-es2015": "^6.24.1",
+        "babel-preset-react": "^6.24.1",
+        "html-loader": "^0.5.5",
+        "react-router": "^3.0.5",
+        "react-router-dom": "^5.0.1",
+        "webpack": "^4.16.1",
+        "webpack-cli": "^3.1.0",
+        "webpack-dev-server": "^3.1.4"
+    },
+    "devDependencies": {
+        "json-loader": "^0.5.7"
+    }
+}
+
+
+
+
+
+
+export const stockData = [{
+        company: "TCS",
+        stockPrice: "2700",
+    },
+    {
+        company: "Infosys",
+        stockPrice: "1010",
+    },
+    {
+        company: "Wipro",
+        stockPrice: "340",
+    },
+    {
+        company: "HCTTech",
+        stockPrice: "890",
+    }
+]
+
+
+
+
+
+import React from 'react'
+
+import {stockData} from './model/data'
+
+function App(){
+    return(
+        <div>
+           {
+               stockData.map((data,key)=>{
+                   return(<div key={key}>
+                        {data.company}+","+{data.stockPrice}
+
+                   </div>)
+               })
+           }
+        </div>
+    )
+}
+
+export default App;
+
+
+
+// var Greeter = require('./model/records.json');
+
+// module.exports = function() {
+//   var greet = document.createElement('div');
+//   greet.textContent = config.greetText;
+//   return greet;
+// };
+
+
+
+
+
+// var Greeter = require('./model/records.json');
+
+// module.exports = function() {
+//   var greet = document.createElement('div');
+//   greet.textContent = config.greetText;
+//   return greet;
+// };
+
+
+
+
+
+
+
+Finally, let's create a config.json file and require it inside the Greeter module. The source code for the new config.json file is shown below:
+
+
+{
+  "greetText": "Hi there and greetings from JSON!"
+}
+      
+The updated Greeter.js:
+
+
+var config = require('./config.json');
+
+module.exports = function() {
+  var greet = document.createElement('div');
+  greet.textContent = config.greetText;
+  return greet;
+};
+
+
+
+
+
+
+
+npm install --save-dev json-loader
+Next, edit the webpack configuration file to add the JSON loader:
+
+
+module.exports = {
+  devtool: 'eval-source-map',
+
+  entry:  __dirname + "/app/main.js",
+  output: {
+    path: __dirname + "/public",
+    filename: "bundle.js"
+  },
+
+  module: {
+    loaders: [
+      {
+        test: /\.json$/,
+        loader: "json-loader"
+      }
+    ]
+  },
+
+  devServer: {
+    contentBase: "./public",
+    colors: true,
+    historyApiFallback: true,
+    inline: true
+  }
+}
+
+
+
+
+
+
+
+test:  A regular expression that matches the file extensions that should run through this loader (Required).
+loader:  The name of the loader (Required).
+include / exclude:   Optional setting to manually set which folders and files the loader should explicitly add or ignore.
+query:  The query setting can be used to pass Additional options to the loader.
+
+
+    
+
+
+
+An asset is a file. It being an image, css, less, json, js, jsx etc. And this file is a node in the dependency graph created by Webpack.
+
+
+
+When Webpack investigates your app, it will hook on new nodes to the dependency graph. When a new node is found, it will check the file extension. If the extension matches your configuration, it will run a process on it. This process is called a loader. An example of this would be to transform the content of a .js file from ES6 to ES5. Babel is a project that does this and it has a Webpack loader. Install it with npm install babel-loader.
+
+
+
+
+
+
+With Webpack, you give a single path. The pat
+
+h to your entry point. This is typically index.js or main.js. Webpack will now investigate your application. It will figure out how everything is connected through require, import, etc. statements, url values in your CSS, href values in image tags, etc. It creates a complete dependency graph of all the assets your application needs to run. All of this just pointing to one single file.
+
+We basically tell Webpack that whenever it finds a .js file it should be passed to the Babel loader.
+
+
+
+
+
+
+
+
+https://gofile.io/d/CSqqia
+    
+    
+    
+    
+    
+    
+    
+
+
+DAY 3:- https://codebunk.com/b/8371100154626/
+dAY 4 - https://codebunk.com/b/6091100155208/
+DAY 5:- https://codebunk.com/b/5161100155818/
+DAY 6: https://codebunk.com/b/7441100156342/
+DAY 7:- https://codebunk.com/b/6791100157618/
+DAY 8:- https://codebunk.com/b/3031100158087/
+DAY 9:- https://codebunk.com/b/6931100158698/
