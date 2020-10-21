@@ -1,3 +1,6 @@
 [submodule "Day14JDBC"]
 	path = Day14JDBC
 	url = https://github.com/SouvickMondal/SpringAOP.git
+[submodule "ReactApps"]
+	path = ReactApps
+	url = https://github.com/SouvickMondal/hero.git
