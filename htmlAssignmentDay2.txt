@@ -1,0 +1,1199 @@
+1] AGE Calculator
+
+WAP to accept two values from text box -> convert to date format and print the difference between two dates
+
+NOTE:- check validation first value should be less than second value
+
+2] display digital clock on screen
+
+3] Hide and seek game
+
+
+4] person class 
+	with name,address,DOB 
+	methods
+		acceptDetails();
+		ageCalculate();
+		displayDetails();
+ 
+
+
+
+	
+	
+	
+
+                  
+
+
+        
+        
+        
+        
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript">
+		//ES5 notation
+
+
+		//Constructor version
+		function Employee(id,name,sal){
+			this.empId=id;
+			this.name=name;
+			this.salary=sal;
+			this.getEmpId=function(){
+				return this.empId;
+			}
+
+			this.getName=function(){
+				return this.name;
+			}
+			this.getSalary=function(){
+				return this.salary;
+			}
+
+			this.showEmployeeDetails=function(){
+				alert("Employee details are"+this.empId+" "+this.name+" "+this.salary)
+			}
+		}
+
+		var coll=new Array();
+
+		function save(){	
+			var id=document.getElementById('txt1').value;
+			var name=document.getElementById('txt2').value;
+			var salary=document.getElementById('txt3').value;
+
+			var obj=new Employee(id,name,salary)
+			coll.push(obj)
+		}
+
+		function display(){
+			str="<table border='5px'>"
+			for(i=0;i<coll.length;i++){
+				str+="<tr> <td>"+coll[i].getEmpId()+"</td> <td>"+coll[i].getName()+"</td> <td>"+coll[i].getSalary()+"</td></tr>"
+				//alert(str)
+			}
+			str+='</table>'
+			//alert(str)
+			document.getElementById('d1').innerHTML=str;
+
+		}
+
+	</script>
+</head>
+<body>
+	Enter your empId <input type="text" name="" id="txt1"> <br>
+	Enter your Name <input type="text" name="" id="txt2"> <br>
+	Enter your Salary <input type="text" name="" id="txt3"> <br>
+
+	<input type="button" name="" onclick="save()" value="SAVE RECORD"> <br>
+	<input type="button" name="" onclick="display()" value="Display RECORD"> <br>
+
+	<div id="d1"></div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+//ES5 notation
+
+
+		//Constructor version
+		// function Employee(){
+		// 	this.empId=101;
+		// 	this.name="Eshan";
+
+		// 	this.showEmployeeDetails=function(){
+		// 		alert("Employee details are"+this.empId+" "+this.name)
+		// 	}
+		// }
+		// var e1=new Employee();
+		// e1.showEmployeeDetails();
+
+
+
+		//Liternal Version
+		var emp={
+			empId:101,
+			name:"Eshan",
+			showEmployeeDetails:function(){
+				alert("Employee details are"+this.empId+" "+this.name)	
+			}
+		}
+
+		emp.showEmployeeDetails();
+
+        
+        
+        
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript">
+		//ES5 notation
+
+		function Employee(){
+			this.empId=101;
+			this.name="Eshan";
+
+			this.showEmployeeDetails=function(){
+				alert("Employee details are"+this.empId+" "+this.name)
+			}
+
+		}
+
+		var e1=new Employee();
+		e1.showEmployeeDetails();
+
+	</script>
+</head>
+<body>
+
+
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript">
+		function getDetails(){
+			var name=document.getElementById('txt1').value
+			alert("Name is "+name)
+		}
+
+	</script>
+</head>
+<body>
+
+Enter your name <input type="text" name="" id="txt1">
+<br>
+<input type="button" name="" onclick="getDetails()" value="CLICK ME">
+
+</body>
+</html>
+
+
+
+
+
+
+
+//1
+		alert("javascript alert");
+		//2
+		var num1=parseInt(prompt("Enter number"));
+		alert("Number is "+num1)
+
+		//3
+		var result=confirm("Do you want to cont...");
+		alert("result "+result)
+
+		//4
+		console.log("LOG MESSAGE FOR APPLICATION")
+
+		//5
+		document.write("Message for browser")
+
+        
+        
+        
+
+
+body
+  font: 100%
+  color: #333
+    
+    
+    
+
+Other ways to specify value for font-size:
+Percentage (of parent font-size)
+Absolute size keyword: xx-small, x-small, small, medium (initial value), large, x-large, xx-large
+User agent specific; should differ by ~ 20%
+Relative size keyword: smaller, larger
+Relative to parent element’s font
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		
+		div{
+			height: 100px;
+			width: 200px;
+			border-color: red green orange pink;
+			border-width: 10px;
+			border-style: solid;
+		}
+	</style>
+</head>
+<body>
+
+<div> Div </div>
+</body>
+</html>
+
+
+
+
+https://gofile.io/d/rew6Wa
+    
+    
+    
+    
+    
+
+
+<style type="text/css">
+    
+    *{ list-style-type:none; font-family: Gill sans;}
+
+li {float: left;}
+#wrapper {
+  width:300px;
+  height:50px;
+  background: rgb(241, 241, 241);
+  margin: 250px auto;
+  border-radius:5px/10px;
+}
+
+#equaliser {
+  width: 30px;
+  height: 50px;
+  position: relative;
+  bottom:10px;
+}
+.bar {
+  float:left;
+  width: 7px;
+  height: 10px;
+  background:red;
+  position: absolute;
+  bottom:0;
+}
+
+.first { 
+  left: 7px;
+  -webkit-animation: firstBar  1s infinite;
+}
+.second { 
+  left: 21px; 
+  -webkit-animation: secondBar  1s infinite;
+}
+
+
+.third { 
+  left: 35px; 
+  -webkit-animation: thirdBar  1s infinite;
+}
+
+@-webkit-keyframes firstBar {
+  0%   { height: 10px; }
+  50%  { height: 30px; }
+  100% { height: 10px; }
+}
+
+@-webkit-keyframes secondBar {
+  0%   { height: 30px; }
+  50%  { height: 10px; }
+  100% { height: 30px; }
+}
+
+@-webkit-keyframes thirdBar {
+  0%   { height: 20px; }
+  40%  { height: 10px; }
+  60%  { height: 30px; }
+  100% { height: 20px; }
+}
+
+#music li{ font-size: 25px; color:rgb(41,41, 41);}
+#music .time {margin-left:67px;}
+
+</style>
+
+<div id="wrapper"> 
+  <li id="equaliser">
+    <div class="bar first">
+    </div>
+    <div class="bar second">
+    </div>
+    <div class="bar third">
+    </div>
+  </li><!-- /equaliser -->
+  <li id="music">
+    <ul>
+      <li class="tune">Start Now</li>
+      <li class="time">5:57</li>
+    </ul>
+  </li><!-- /music -->
+</div>
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<style>
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+    
+    </style>
+<body>
+
+<h3>Using CSS to style a HTML Form</h3>
+
+<div>
+  <form action="action_page.php">
+    <label for="fname">First Name</label>
+    <input type="text" id="fname" name="firstname">
+
+    <label for="lname">Last Name</label>
+    <input type="text" id="lname" name="lastname">
+
+    <label for="country">State</label>
+    <select id="country" name="country">
+      <option value="australia">Australia</option>
+      <option value="canada">Canada</option>
+      <option value="usa">USA</option>
+    </select>
+  
+    <input type="submit" value="Submit">
+  </form>
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #e7e7e7;
+    background-color: #f3f3f3;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: #666;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: #ddd;
+}
+
+li a.active {
+    color: white;
+    background-color: #4CAF50;
+}
+
+</style>
+</head>
+<body>
+
+<ul>
+  <li><a class="active" href="#home">Home</a></li>
+  <li><a href="#news">News</a></li>
+  <li><a href="#contact">Contact</a></li>
+  <li><a href="#about">About</a></li>
+</ul>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+    margin: 0;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 25%;
+    background-color: #f1f1f1;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+}
+
+li a {
+    display: block;
+    color: #000;
+    padding: 8px 0 8px 16px;
+    text-decoration: none;
+}
+
+li a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+li a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}
+</style>
+</head>
+<body>
+
+<ul>
+  <li><a class="active" href="#home">Home</a></li>
+  <li><a href="#news">News</a></li>
+  <li><a href="#contact">Contact</a></li>
+  <li><a href="#about">About</a></li>
+</ul>
+
+<div style="margin-left:25%;padding:1px 16px;height:1000px;">
+  
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+<html>
+   <head>
+      <style type="text/css">
+         p:first-letter { font-size: 5em; }
+         p.normal:first-letter { font-size: 10px; }
+      </style>
+   </head>
+   <body>
+      <p class="normal"> First character of this paragraph will be normal and will have font size 10 px;</p>
+      
+      <p>The first character of this paragraph will be 5em big  as  defined in the CSS rule above. Rest of the characters in this paragraph will remain normal. This example shows how to use :first-letter pseduo element to give effect to the first characters  of any HTML element.</p>
+   </body>
+</html>
+
+
+
+
+
+
+<html>
+   <head>
+      <style type="text/css">
+         p:first-line { text-decoration: underline; }
+         p.p1:first-line { text-decoration: none; }
+      </style>
+   </head>
+   <body>
+      <p class="p1"> This line would not have any underline because this belongs to  nline class.</p>
+      
+      <p>The first line of this paragraph will be underlined as defined in the CSS rule above. Rest of the lines in this paragraph will remain normal. This example shows how to use :first-line pseduo element to give effect to the first line of any HTML element.</p>
+   </body>
+</html>
+
+
+
+
+
+
+<html>
+   <head>
+   
+      <style type="text/css">
+         div > p:first-child
+         {
+            text-indent: 25px;
+         }
+      </style>
+      
+   </head>
+   <body>
+   
+      <div>
+         <p>First paragraph in div. This paragraph will be indented</p>
+         <p>Second paragraph in div. This paragraph will not be indented</p>
+      </div>
+      <p>But it will not match the paragraph in this HTML:</p>
+      
+      <div>
+         <h3>Heading</h3>
+         <p>The first paragraph inside the div. This paragraph will not be effected.</p>
+      </div>
+      
+   </body>
+</html>
+
+
+
+
+
+<html>
+   <head>
+      <style type="text/css">
+         a:focus {color: #0000FF}
+      </style>
+   </head>
+   <body>
+      <a href="">Click this Link</a>
+   </body>
+</html> 
+
+                  
+                  
+
+<html>
+   <head>
+      <style type="text/css">
+         a:active {color: #FF00CC}
+      </style>
+   </head>
+   <body>
+      <a href="">Click This Link</a>
+   </body>
+</html> 
+
+                   
+
+<html>
+   <head>
+      <style type="text/css">
+         a:hover {color: #FFCC00}
+      </style>
+   </head>
+   <body>
+      <a href="">Bring Mouse Here</a>
+   </body>
+</html> 
+
+                  
+
+<html>
+   <head>
+      <style type="text/css">
+         a:visited {color: red}
+      </style>
+   </head>
+   <body>
+      <a href="www.google.com">Click this link</a>
+   </body>
+</html> 
+
+
+
+<html>
+   <head>
+      <style type="text/css">
+         a:link {color: #FFC107;}
+      </style>
+   </head>
+   <body>
+      <a href="http://www.google.com">Black Link</a>
+   </body>
+</html>
+
+                 
+                 
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		p{
+			background-color: red !important;
+		}
+		p{
+			background-color: green;
+		}
+
+	</style>
+</head>
+<body>
+<p> PARA 1</p>
+</body>
+</html>
+
+
+
+
+
+
+
+The @font-face rule is used to exhaustively describe a font face for use in a document. @font-face may also be used to define the location of a font for download, although this may run into implementation-specific limits.
+
+In general, @font-face is extremely complicated, and its use is not recommended for any except those who are expert in font metrics.
+
+Here is an example -
+
+<style tyle="text/css">
+   <!--
+   @font-face {
+      font-family: "Scarborough Light";
+      src: url("http://www.font.site/s/scarbo-lt");
+   }
+   @font-face {
+      font-family: Santiago;
+      src: local ("Santiago"),
+      url("http://www.font.site/s/santiago.tt")
+      format("truetype");
+      unicode-range: U+??,U+100-220;
+      font-size: all;
+      font-family: sans-serif;
+   }
+   -->
+</style>
+
+
+
+
+
+If you are writing your document using a character set other than ASCII or ISO-8859-1 you might want to set the @charset rule at the top of your style sheet to indicate what character set the style sheet is written in.
+
+The @charset rule must be written right at the beginning of the style sheet without even a space before it. The value is held in quotes and should be one of the standard character-sets. For example -
+
+<style tyle="text/css">
+   <!--
+   @charset "iso-8859-1"
+   .......other CSS rules .....
+   -->
+</style>
+
+
+
+
+
+
+
+The @import rule allows you to import styles from another style sheet. It should appear right at the start of the style sheet before any of the rules, and its value is a URL.
+
+It can be written in one of the two following ways -
+
+<style tyle="text/css">
+   <!--
+   @import "mystyle.css";
+   or
+   @import url("mystyle.css");
+   .......other CSS rules .....
+   -->
+</style>
+The significance of the @import rule is that it allows you to develop your style sheets with a modular approach. You can create various style sheets and then include them wherever you need them.
+
+
+
+
+
+
+
+The @import: rule imports another style sheet into the current style sheet.
+The @charset rule indicates the character set the style sheet uses.
+The @font-face rule is used to exhaustively describe a font face for use in a document.
+The !important rule indicates that a user-defined rule should take precedence over the author's style sheets.
+
+
+
+
+
+
+
+<html>   <head>   </head>      <body>      <p>Move the mouse over the words to see the cursor change:</p>            
+<div style="cursor:auto">Auto</div>      
+<div style="cursor:crosshair">Crosshair</div>      
+<div style="cursor:default">Default</div>      
+<div style="cursor:pointer">Pointer</div>     
+<div style="cursor:move">Move</div>      
+<div style="cursor:e-resize">e-resize</div>      
+<div style="cursor:ne-resize">ne-resize</div>      
+<div style="cursor:nw-resize">nw-resize</div>      
+<div style="cursor:n-resize">n-resize</div>      
+<div style="cursor:se-resize">se-resize</div>     
+ <div style="cursor:sw-resize">sw-resize</div>     
+ <div style="cursor:s-resize">s-resize</div>      
+<div style="cursor:w-resize">w-resize</div>      
+<div style="cursor:text">text</div>      
+<div style="cursor:wait">wait</div>      
+<div style="cursor:help">help</div>   </body>   </html> 
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a, .dropbtn {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover, .dropdown:hover .dropbtn {
+  background-color: red;
+}
+
+li.dropdown {
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1;}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+</style>
+</head>
+<body>
+
+<ul>
+  <li><a href="#home">Home</a></li>
+  <li><a href="#news">News</a></li>
+  <li class="dropdown">
+    <a href="javascript:void(0)" class="dropbtn">Dropdown</a>
+    <div class="dropdown-content">
+      <a href="#">Link 1</a>
+      <a href="#">Link 2</a>
+      <a href="#">Link 3</a>
+    </div>
+  </li>
+</ul>
+
+<h3>Dropdown Menu inside a Navigation Bar</h3>
+<p>Hover over the "Dropdown" link to see the dropdown menu.</p>
+
+</body>
+</html>
+
+                           
+                           
+                           
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		ul{
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			width: 200px;
+			background-color: orange;
+		}
+
+		li a{
+			display: block;
+			color: red;
+			padding: 8px 16px;
+			text-decoration: none;
+		}
+
+		li a:hover{
+			background-color: red;
+			color:white;
+		}
+		fieldset{
+			border-radius: 10px;
+			border-color: red;
+			box-shadow: 10px 10px 2px orange;
+			width: 300px;
+			height: 200px;
+		}
+
+	</style>
+</head>
+<body>
+<ul>
+	<li> <a href="home.html">Home</a></li>
+	<li> <a href="aboutus.html">About Us</a></li>
+	<li> <a href="services.html">Services</a></li>
+	<li> <a href="tutorials.html">Tutorials</a></li>
+	<li> <a href="contact.html">Contact Us</a></li>
+</ul>
+
+<form>
+	<FIELDSET>
+		<legend>Employee Management</legend>
+		<table border="5px">
+			<tr>	
+				<td>Enter your name
+				</td>
+				<td>
+					<input type="text" name="">
+				</td>
+			</tr>
+
+			<tr>	
+				<td>
+				</td>
+
+				<td>
+				</td>
+			</tr>
+
+			<tr>	
+				<td>
+				</td>
+
+				<td>
+				</td>
+			</tr>
+
+
+		</table>
+	</FIELDSET>
+
+
+
+</form>
+</body>
+</html>
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		fieldset{
+			border-radius: 10px;
+			border-color: red;
+			box-shadow: 10px 10px 2px orange;
+			width: 300px;
+			height: 200px;
+		}
+
+	</style>
+</head>
+<body>
+<form>
+	<FIELDSET>
+		<legend>Employee Management</legend>
+		<table border="5px">
+			<tr>	
+				<td>Enter your name
+				</td>
+				<td>
+					<input type="text" name="">
+				</td>
+			</tr>
+
+			<tr>	
+				<td>
+				</td>
+
+				<td>
+				</td>
+			</tr>
+
+			<tr>	
+				<td>
+				</td>
+
+				<td>
+				</td>
+			</tr>
+
+
+		</table>
+	</FIELDSET>
+
+
+
+</form>
+</body>
+</html>
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		#d1{
+			background-color: orange;
+		}
+		p.p1,p.p2{
+			background-color:  green;
+		}
+
+		h1 {
+		   /* text-shadow: 5px 5px 5px #FF0000;*/
+		    word-wrap: break-word;
+		}
+		p.test {
+		    width: 11em; 
+		    border: 1px solid #000000;
+		    word-wrap: break-word;
+		}
+
+
+	</style>
+</head>
+<body>
+	<p class="test"> PARA The life you live is more important than the words you speak</p>
+	<h1> Heading 1</h1>
+	<div id="d1"> The life you live is more important than the words you speak </div>
+	<div id="d2"> Div 2</div>
+
+	<p class="p1"> PARA 1</p>
+	<p class="p2"> PARA 2</p>	
+	<p class="p3"> PARA 3</p>
+	<p class="p4"> PARA 4</p>
+
+
+</body>
+</html>
+
+
+
+
+
+div {
+    border: 2px solid #a1a1a1;
+    padding: 10px 40px; 
+    background: #dddddd;
+    width: 300px;
+    border-radius: 25px;
+}
+
+
+
+
+
+<style> 
+div {
+    width: 300px;
+    height: 100px;
+    background-color: yellow;
+    box-shadow: 10px 10px 5px #888888;
+}
+
+
+
+JQuery Selector some of them can be used in css
+
+
+$("*")	Selects all elements	
+$(this)	Selects the current HTML element	
+$("p.intro")	Selects all <p> elements with class="intro"	
+$("p:first")	Selects the first <p> element	
+$("ul li:first")	Selects the first <li> element of the first <ul>	
+$("ul li:first-child")	Selects the first <li> element of every <ul>	
+$("[href]")	Selects all elements with an href attribute	
+$("a[target='_blank']")	Selects all <a> elements with a target attribute value equal to "_blank"	
+$("a[target!='_blank']")	Selects all <a> elements with a target attribute value NOT equal to "_blank"	
+$(":button")	Selects all <button> elements and <input> elements of type="button"	
+$("tr:even")	Selects all even <tr> elements	
+$("tr:odd")	Selects all odd <tr> elements
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		#d1{
+			background-color: orange;
+		}
+		p.p1,p.p2{
+			background-color:  green;
+		}
+	</style>
+</head>
+<body>
+	<div id="d1"> The life you live is more important than the words you speak </div>
+	<div id="d2"> Div 2</div>
+
+	<p class="p1"> PARA 1</p>
+	<p class="p2"> PARA 2</p>	
+	<p class="p3"> PARA 3</p>
+	<p class="p4"> PARA 4</p>
+
+
+</body>
+</html>
+
+
+
+
+
+style2.css
+
+
+div{
+			background-color: orange;
+			height: 100px;
+			width: 200px;
+			border-radius: 10px;
+		}
+
+
+
+
+style1.css
+
+div{
+			background-color: green;
+			height: 100px;
+			width: 200px;
+			border-radius: 10px;
+		}
+
+
+
+
+index.html
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="style1.css" title="style1">
+	<link rel="alternate stylesheet" type="text/css" href="style2.css" title="style2">
+</head>
+<body>
+	<div> The life you live is more important than the words you speak </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		div{
+			background-color: orange;
+			height: 10px;
+			width: 20px;
+			border-radius: 5px solid;
+		}
+
+	</style>
+</head>
+<body>
+	<div> The life you live is more important than the words you speak </div>
+</body>
+</html>
+
+
+
+
+
+DAY 2

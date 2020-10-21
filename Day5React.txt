@@ -1,0 +1,422 @@
+1] how to filter the array data in javascript react
+2] how get parent element javascript
+3] add all elements in array javascript
+4] add an element to an array javascript
+5] add 10 seconds to date javascript
+6] add 10px to width js
+7] add 2 class names react
+8] add 2 for hours in date timestamp js
+9] add 7 days in date using jquery
+10] add a route to a buttoin in angular
+11] add a slash to string in javascript
+12] how to run a filter having object [] in reactjs
+13] how to use filter when returning jsx
+14] Render JSX
+15] How to Use JavaScript in JSX
+16] How to Use array in JSX
+17] How to define a component
+18] What is the use of this.props.children
+19] Finding a DOM node
+20] Write example to use this.state
+21] Component Lifecycle
+
+
+
+
+
+import Axios from "axios";
+import React from "react"
+import axios from 'axios'
+class Employee extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            people: [],
+        }
+        this.handleChange = this.handleChange.bind(this);
+
+      }
+    componentDidMount() {
+        axios.get('http://jsonplaceholder.typicode.com/users')
+    .then(response => {
+      this.setState({ people: response.data });
+      console.log(this.state.people)
+    })
+    .catch(error => {
+      console.log(error);
+    });
+      }
+    
+      handleChange(e) {
+        
+    let currentList = [];
+        
+    let newList = [];
+    if (e.target.value !== "") {
+      currentList = this.state.people.name;
+      newList = currentList.filter(item => {
+           const lc = item.toLowerCase();
+           const filter = e.target.value.toLowerCase();
+        return lc.includes(filter);
+      });
+    } else {
+   
+      newList = this.state.people;
+    }
+        // Set the filtered state based on what our rules added to newList
+    this.setState({
+      people: newList
+    });
+  }
+
+      render() {
+        return (
+            <div>
+                Enter the record to search <input type="text" className="input" onChange={this.handleChange} placeholder="Search..." />
+
+            <ul>
+            { this.state.people.map(person => <li>{person.id}   {person.name}    {person.username}  {person.email}</li> )}
+          </ul>
+          </div>
+        )
+      }
+}
+
+export default Employee;
+
+
+
+
+
+
+
+
+
+
+import Axios from "axios";
+import React from "react"
+import axios from 'axios'
+class Employee extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            people: [],
+        }
+      }
+    componentDidMount() {
+        axios.get('http://jsonplaceholder.typicode.com/users')
+    .then(response => {
+      this.setState({ people: response.data });
+      console.log(this.state.people)
+    })
+    .catch(error => {
+      console.log(error);
+    });
+      }
+    
+      render() {
+        return (
+          <ul>
+        
+          </ul>
+        )
+      }
+}
+
+export default Employee;
+
+
+
+
+import Axios from "axios";
+import React from "react"
+import axios from 'axios'
+class Employee extends React.Component{
+    constructor(props){
+        super(props)
+        this.state={
+            person:[]
+        }
+    }
+    componentDidMount(){
+        //const apiUrl="https://api.github.com/users/hacktivist123/repos";
+        // fetch(apiUrl)
+        // .then((response)=>response.json())
+        // .then((data)=>console.log('RECORDS ARE',this.state.person))
+
+       axios.get("http://jsonplaceholder.typicode.com/users")
+       .then(res=>{
+           console.log(res.data)
+           const persons=res.data;
+
+           this.setState({persons})
+       })
+        
+       console.log(this.state.person)
+    }
+    render(){
+        return(
+
+            <div>
+                     <h1>HEllo</h1>
+            </div>
+        );
+    }
+}
+
+export default Employee;
+
+
+
+
+
+
+
+
+Each router creates a history object, which it uses to keep track of the current location[1] and re-render the website whenever that changes. The other components provided by React Router rely on having that history object available through React’s context, so they must be rendered as descendants of a router component. A React Router component that does not have a router as one of its ancestors will fail to work.
+
+
+One reason browserHistory is preferred over hashHistory is that it is better for deployment and production. hashHistory "works" by adding a unique key at the end of the url and creates a "history" for this by using these keys to keep track of your current session.
+
+browserHistory looks much cleaner without the #, but in order to get this set up, you need to configure your server such that it can handle the URLs you intend to provide it.
+
+
+
+
+When using hash history, you’ll see an extra item in your query string that looks something like _k=123abc. This is a key that history uses to look up persistent state data in window.sessionStorage between page loads.
+
+
+
+
+
+
+import React, { Component } from 'react'
+import { Router, Route, IndexRoute,hashHistory,Link} from 'react-router'
+
+class App7 extends Component {
+    render () {
+        return (
+          <Router history={hashHistory}>
+            <Route path='/' component={Container}>
+              <IndexRoute component={Home} />
+              <Route path='address' component={Address}>
+              </Route>
+              <Route path='*' component={NotFound} />
+            </Route>
+          </Router>
+        )
+      }
+}
+const Home = () => <h1>Hello from Home!</h1>
+const Address = () => <h1>We are located at 555 Jackson St.</h1>
+const NotFound=()=><h1> 404 ERROR PAGE NOT FOUND </h1>
+
+const Nav = () => (
+    <div>
+      <Link to='/'>Home</Link>&nbsp;
+      <Link to='/address'>Address</Link>
+     
+    </div>
+  )
+
+const Container = (props) => <div>
+  <Nav />
+  {props.children}
+</div>
+  
+
+
+export default App7
+
+
+
+
+
+
+
+
+import React, { Component } from 'react'
+import { Router, Route, IndexRoute,hashHistory} from 'react-router'
+class App7 extends Component {
+  render() {
+    return (
+      <Router history={hashHistory}>
+        <Route path='/' component={Home} />
+        <Route path='/address' component={Address} />
+      </Router>
+    )
+  }
+}
+const Home = () => <h1>Hello from Home!</h1>
+const Address = () => <h1>We are located at 555 Jackson St.</h1>
+export default App7
+
+
+
+
+import React from 'react';
+
+const App7=()=> <h1>Hello New Component</h1>
+
+export default App7;
+
+
+
+
+
+"react-router": "^3.0.5",
+    "react-router-dom": "^5.0.1",
+ 
+
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+class App6 extends React.Component{
+    constructor(props){
+        super(props)
+        this.state={
+            saying:''
+        }
+    }
+    update(e){
+        this.setState({saying:e.target.value});
+    }
+   
+    render(){
+        return (
+        <div>
+            Eshan Says <input type="text" onChange={this.update.bind(this)}></input>
+            <br>
+            </br>
+            <h1>{this.state.saying}</h1>
+        </div>
+        
+        );
+    }
+}
+export default App6;
+
+
+
+
+    
+
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+class App5 extends React.Component{
+    constructor(props){
+        super(props)
+        this.inValue = this.incrementValue.bind(this);
+        this.temp=100
+    }
+    incrementValue (){
+        console.log(this.refs)
+        ReactDOM.findDOMNode(this.refs.Inc).value++;
+        console.log(this.temp++)
+    }
+    render(){
+        return (<div>
+            <input type="text" ref="Inc" value="0"></input>
+            <button onClick={this.inValue}>Increment</button>
+
+        </div>);
+    }
+}
+
+export default App5;
+
+
+
+
+
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+class App5 extends React.Component{
+    constructor(props){
+
+        super(props)
+        this.incrementValue = this.incrementValue.bind(this);
+    }
+    incrementValue (){
+        console.log(this.refs)
+        ReactDOM.findDOMNode(this.refs.Inc).value++;
+    }
+    render(){
+        return (<div>
+            <input type="text" ref="Inc" value="0"></input>
+            <button onClick={this.incrementValue}>Increment</button>
+
+        </div>);
+    }
+}
+
+export default App5;
+
+
+
+
+
+
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+class App5 extends React.Component{
+    constructor(props){
+
+    }
+    render(){
+        return (<div></div>);
+    }
+}
+
+export default App5;
+
+
+
+
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+class App extends React.Component {
+   constructor(props) {
+      super(props);
+		
+      this.state = {
+         data: ''
+      }
+      this.updateState = this.updateState.bind(this);
+      this.clearInput = this.clearInput.bind(this);
+   };
+   updateState(e) {
+      this.setState({data: e.target.value});
+   }
+   clearInput() {
+      this.setState({data: ''});
+      ReactDOM.findDOMNode(this.refs.myInput).focus();
+   }
+   render() {
+      return (
+         <div>
+            <input value = {this.state.data} onChange = {this.updateState} 
+               ref = "myInput"></input>
+            <button onClick = {this.clearInput}>CLEAR</button>
+            <h4>{this.state.data}</h4>
+         </div>
+      );
+   }
+}
+export default App;
+
+
+
+
+
+
+DAY 5

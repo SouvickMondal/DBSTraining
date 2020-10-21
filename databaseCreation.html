@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript">
+
+		var myObj=openDatabase("MyDatabase","1.0","Description:- Movie collection",2*1024*1024,onSuccess());
+		myObj.transaction(function(tx){
+				tx.executeSql('CREATE TABLE IF NOT EXISTS movie(name)')
+				alert("table is created")
+		})
+		
+		function insertRecord(){
+				myObj.transaction(function(tx){
+					tx.executeSql('insert into movie(name) values("The Pursuit of Happiness")')
+					alert("data inserted")
+				})
+		}
+		function onSuccess(){
+			alert("Database is created")
+		}
+
+	</script>
+</head>
+<body>
+	<input type="button" name="" value="Insert Record" onclick="insertRecord()">
+
+</body>
+</html>
+
+

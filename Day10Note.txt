@@ -1,0 +1,163 @@
+https://medium.com/mobile-web-dev/how-to-build-and-deploy-a-react-app-to-github-pages-in-less-than-5-minutes-d6c4ffd30f14
+    
+    
+    
+
+
+npm install --save sbm_login_application
+
+
+
+
+
+https://gofile.io/d/C1bDGc
+    
+    
+    
+    
+    
+
+
+https://www.youtube.com/watch?v=-SaZiADGLHs
+
+    
+    
+
+
+
+REPL WINDOWS 
+•	Press Ctrl+C to terminate the current command.
+•	Pressing Ctrl + C twice causes the REPL to quit.
+•	Press Ctrl+D to exit the REPL.
+•	Pressing up and down arrow keys you can see command history and modify previous commands.
+•	Press tab key to see the list of current commands. If you type a single character followed by tab it will show the list of keywords, functions, and variables starting with that particular character.
+•	The REPL can handle multiline expression.
+•	The REPL provides a special variable _ (underscore) which is used to pull the result of the last expression.
+
+fruits = ['banana', 'apple', 'mango']
+.save fruits.js
+.load fruits.js
+
+> .editor
+// Entering editor mode (^D to finish, ^C to cancel)
+function welcome(name) {
+  return `Hello ${name}!`;
+}
+welcome('Node.js User');
+// ^D
+'Hello Node.js User!'
+>
+https://www.youtube.com/watch?v=-SaZiADGLHs
+
+npm init --yes # This will trigger automatically populated initialization.
+npm explore npm-watch -- npm version  
+(You can run npm commands against packages in your node_modules by invoking the explore command. For instance, you can verify which version of a package you have installed without sifting through your package-lock)
+
+You can get the latest (or any) package info with the view command.
+npm view npm-watch
+
+
+Looking for the repo of a package so you can open an issue or make a sweet contribution? This command will crack open your browser and take you there straight away.
+$ npm repo webpack
+
+The docs command works similar to repo but it will do it’s best to find the canonical documentation site for a package.
+npm docs react
+
+
+Ever wonder what you’re actually delivering in your npm package? Use the pack command to produce a tarball of your package as it would be published to the registry.
+$ npm pack
+
+NPM commands
+1]  npm init create the package.json file
+   Then to modify 
+npm config set init.license MIT
+
+~/.npmrc – file for npm setttings
+
+npm config ls -l  
+(Running npm config ls -l will show you all the implicit settings for npm, including what it thinks is the right place to put the .npmrc. But if you have never logged in (using npm login) it will be empty. Simply log in to create it.)
+
+
+npm config set init.author.name Shital madake    
+  npm config set init.author.email Shitalmadake@yahoo.com
+
+REMOVE THE CREATED FILE
+AND CREATE ANOTHER ONE WITH EMPTY
+Npm init –y
+Will generate empty file but with Author name and email id 
+
+Add dependencies 
+Npm i  express
+
+
+Add Git hub 
+1] Git init
+2] git remote add origin https://github.com/sbmadake/myapp123.git
+Then check git folder and config file
+Delete package.json file and create again 
+Npm init –y
+It create main based on the first js file name otherwise it uses application name as it for .js file
+
+	
+
+
+
+
+2] playing with git  scripts
+
+Inside package.json
+Scripts
+“scripts”:{
+“shital”: “node index.js”
+}
+
+To run this 
+Use command 
+Npm run Shital
+
+ONCE YOU CHANGE FILE USE COMMANDS TO CHANGE GITHHUB
+
+1] git init
+2] git add .
+3] git commit -m 'first change'
+4] git push origin master 
+   Or git push --set-upstream origin master
+
+
+Change script with 
+“gitty”: “git add . && git commit –m \”updated\” “
+Npm run gitty – real update message
+
+
+TO DO THAT 
+
+Change script 
+“gitty” : “node g.js”
+
+
+
+
+
+const { exec } = require('child_process')
+let args = process.argv
+args.slice(0, 2)
+let str = args.join(' ');
+
+console.log(str)
+exec('git add .', cbadd)
+
+function cbadd(err, stdout, stdin) {
+    if (err) {
+        console.log(err)
+    }
+    //it works
+    exec(`git commit -m"${str}"`, cbcommit)
+}
+
+function cbcommit(err, stdout, stdin) {
+    if (err) {
+        console.log(err)
+    }
+    //it works
+    console.log('done')
+}
