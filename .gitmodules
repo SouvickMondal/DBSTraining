@@ -4,3 +4,9 @@
 [submodule "ReactApps"]
 	path = ReactApps
 	url = https://github.com/SouvickMondal/hero.git
+[submodule "AllAssignment"]
+	path = AllAssignment
+	url = https://github.com/SouvickMondal/Assignment.git
+[submodule "Day6"]
+	path = Day6
+	url = https://github.com/SouvickMondal/React-Spring-SpringBoot.git
