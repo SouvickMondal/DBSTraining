@@ -1,0 +1,8 @@
+1.> Spring Boot is an open source Java-based framework used to create a micro Service. It is developed by Pivotal Team and is used to build stand-alone and production ready spring applications.
+1.1.> The main goal of Spring Boot Framework is to reduce Development, Unit Test and Integration Test time and to ease the development of Production ready web applications very easily compared to existing Spring Framework, which really takes more time. To provide some defaults to quick start new projects within no time.
+2.> The @SpringBootApplication is a combination of three annotations @Configuration (used for Java-based configuration), @ComponentScan (used for component scanning), and @EnableAutoConfiguration (used to enable auto-configuration in Spring Boot).
+3.> The Spring Initializer is ultimately a web application that can generate a Spring Boot project structure for you. ... It doesn't generate any application code, but it will give you a basic project structure and either a Maven or a Gradle build specification to build your code with.
+3.1.> With the help of Spring Initializr, we can easily generate the structure of the Spring Boot Project. It offers extensible API for creating JVM-based projects. It also provides various options for the project that are expressed in a metadata model.
+4.> The Spring Boot CLI is a command line tool that you can use if you want to quickly develop a Spring application. It lets you run Groovy scripts, which means that you have a familiar Java-like syntax without so much boilerplate code. You can also bootstrap a new project or write your own command for it.
+5.> Yes, we can change. We have go to "application.properties" and type--> 
+server.port=9090 or any number .

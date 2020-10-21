@@ -1,0 +1,688 @@
+The return value of the impure functions does not solely depend on its arguments
+Hence, if you call the impure functions with the same set of arguments, you might get the different return values
+For example, Math.random(), Date.now()
+They may have any side effects like network or database calls
+They may modify the arguments which are passed to them
+For example,
+
+
+function squareAll(items) {
+
+  var len = items.length;
+  for (var i = 0; i < len; i++) {
+    items[i] = items[i] * items[i];
+  }
+
+  return items;
+}
+
+
+
+
+
+
+The return value of the pure functions solely depends on its arguments
+Hence, if you call the pure functions with the same set of arguments, you will always get the same return values
+They do not have any side effects like network or database calls
+They do not modify the arguments which are passed to them
+For example,
+
+function calculateSquareArea(x) {
+   return x * x;
+}
+
+
+
+
+
+
+var Employee={age:30};
+
+function pureFunction(age){
+	age=age+5;
+	return age;
+}
+
+var c=pureFunction(Employee.age)
+
+//Here only age is passed as parameter and function is modifying only age
+
+
+
+
+
+
+
+var Employee={age:30};
+
+function impureFunction(emp){
+	emp.age=emp.age+5;
+	return emp.age;
+}
+
+var c=impureFunction(Employee)
+
+//Here Employee is object type and function is modifying it
+
+
+
+
+
+
+
+function pureFunction(a,b){
+	return a+b;
+}
+
+var c=pureFunction(1,2);
+
+//pure function bacause it is only depends on parameter "a" and "b"
+
+
+
+
+
+var b=1;
+function impureFunction(a){
+	return a+b;
+}
+var c=impureFunction(1);
+
+Impure function because it is dependent on external parameter "b"
+
+
+
+import { connect } from 'react-redux';
+import { fetchPeople } from './action';
+import Person from './person';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+
+class PeopleList extends Component {
+    constructor() {
+        super();
+        this.state = { ... }
+    }
+   
+    componentWillMount() {
+        this.props.fetchPeople();
+    }
+    
+    renderPerson({ name, age }) {
+        return (
+            <Person name={name} age={age} />
+        );
+    }
+
+    render() {
+        return (
+            <div className="people-list">
+                {this.props.people.map(renderPerson)}
+            </div>
+        );
+    }
+}
+
+function mapStateToProps(state) {
+    return { people: state.people };
+}
+
+PeopleList.propTypes = {
+    fetchPeople: PropTypes.func.isRequired,
+    people: PropTypes.array
+}
+
+export default connect(
+    mapStateToProps,
+    { fetchPeople }
+)(PeopleList));
+
+
+
+
+
+
+
+
+Stateful component
+The stateful component is usually connected to the Redux store and extends Component to be able to handle life-cycle methods. The stateful components are:
+
+Concerned with how things work (onSubmit, onChange, life-cycle methods)
+May contain X number of stateless and stateful components.
+Provide the data and behaviour to stateless and other stateful components.
+Connect to Redux and may pass the state/props to other components as props.
+
+
+
+
+import PropTypes from 'prop-types';
+import React from 'react';
+
+function Person(props) {
+    const { name, age } = props;
+    
+    return (
+       <div className="person">
+           <p>{name}</p>
+           <p>{age}</p>
+       <div>
+    );
+}
+
+Person.propTypes = {
+    name: PropTypes.string.isRequired,
+    age: PropTypes.number.isRequired
+};
+
+export default Person;
+
+
+
+
+
+
+The stateless component is basically a function that may take a parameter(s) and returns the markup.
+
+The stateless components are:
+
+Concerned with how things look (DOM elements, Styles).
+May contain other stateless components.
+May allow containment via this.props.children.
+Have no dependencies on the rest of the app, such as Redux.
+Don’t specify how the data is loaded or mutated.
+Receive data and callbacks exclusively via props.
+Rarely have their own state.
+Are written as functional components.
+
+
+
+
+
+
+
+In a nutshell, stateless components are only responsible for receiving props and rendering the JSX component, while the stateful components are responsible for handling how the things works (Redux, Flux, handleSubmit.. etc.) and for the component life-cycle (e.g: componentDidMount). This helps us to separate the concerns and to build reusable components that can be used anywhere.
+
+
+
+
+
+
+STATELESS COMPONENT declared as a function that has no state and returns the same markup given the same props.
+
+A quote from the React documentation:
+
+These components must not retain internal state, do not have backing instances, and do not have the component lifecycle methods. They are pure functional transforms of their input, with zero boilerplate. However, you may still specify .propTypes and .defaultProps by setting them as properties on the function, just as you would set them on an ES6 class.
+
+
+
+
+
+
+We brainstormed with a few developers on how ESLint has saved them time and here’s a short list of what we came up with.
+
+Do not pass go, do not collect…: The linter can stop the build if the project has any errors.
+Stop those old habits!: Did you really just say var?! ESLint will quickly remind you if you need to use let or const
+Smaller Packages: You have a const, or a var… but it’s not used? Guess what? It’ll let you know that you haven’t used it!
+Hate repeating yourself?: Good news, ESLint will remind you to use object destructing!
+Undefined…: Need I say much more? We’ve all had our fair share of frustration with anything undefined related. ESLint notifies you when you have an undefined variable in the file.
+Missing Something?: Maybe you’re looking at a colleague’s file and wondering why something isn’t working… When you hit that file, ESLint will let you know that you’re missing something, an npm package. It’ll even give you the line to install from the terminal.
+
+    
+    
+
+
+Oof But So Many Things to Fix!
+So you have a giant project and didn’t know about ESLint, eh? Now you’re linting and are somewhat terrified with the hundreds or even thousands of errors you’re seeing? Not to fear! ESLint has a feature where you enter the file path + eslint --fix and it automatically fixes every simple error that won’t cause a dumpster fire in our project.
+
+To try this in our current project, run the following from your terminal:
+
+$ eslint --fix src/App.js
+
+
+
+
+
+
+
+
+{
+  "parser": "babel-eslint",
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "space-in-parens": [ 0, "always" ],
+    "template-curly-spacing": [ 2, "always" ],
+    "array-bracket-spacing": [ 2, "always" ],
+    "object-curly-spacing": [ 2, "always" ],
+    "computed-property-spacing": [ 2, "always" ],
+    "no-multiple-empty-lines": [ 2, { "max": 1, "maxEOF": 0, "maxBOF": 0 } ],
+    "quotes": [ 1, "single", "avoid-escape" ],
+    "no-use-before-define": [ 2, { "functions": false } ],
+    "semi": [0, "never"],
+    "prefer-const": 1,
+    "react/prefer-es6-class": 0,
+    "react/jsx-filename-extension": 0,
+    "react/jsx-curly-spacing": [ 2, "always" ],
+    "react/jsx-indent": [ 2, 4 ],
+    "react/prop-types": [ 1 ],
+    "react/no-array-index-key": [ 1 ],
+    "class-methods-use-this": [ 1 ],
+    "no-undef": [ 1 ],
+    "no-case-declarations": [ 1 ],
+    "no-return-assign": [ 1 ],
+    "no-param-reassign": [ 1 ],
+    "no-shadow": [ 1 ],
+    "camelcase": [ 1 ],
+    "no-underscore-dangle" : [0, "always"],
+  }
+}
+
+
+
+
+
+
+
+
+
+
+const path = require('path');
+
+var config = {
+    entry: './main.js',
+
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'index.js',
+    },
+    devServer: {
+        inline: true,
+        port: 3000
+    },
+
+    module: {
+        rules: [{
+                test: /\.jsx?$/,
+                exclude: /node_modules/,
+                loader: 'babel-loader',
+
+                query: {
+                    presets: ['es2015', 'react']
+                }
+            }, {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            },
+            {
+                test: /\.html$/,
+                use: ["html-loader?config=otherHtmlLoaderConfig"]
+            },
+            {
+                test: /\.ts$/,
+                use: ["ts-loader"]
+            }
+
+        ],
+
+
+    }
+}
+module.exports = config;
+
+
+
+
+
+
+import React from 'react'
+import ReactDOM from "react-dom"
+import Login from "./App.jsx"
+ReactDOM.render( < Login / > , document.getElementById("example"));
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+    <title>React Router Tutorial</title>
+</head>
+
+<body>
+
+    <div id="example"></div>
+    <script src="index.js"></script>
+
+
+</body>
+
+</html>
+
+
+
+
+import React from "react";
+export default class Login extends React.Component{
+    
+    detDetails(){
+        var val;
+        if (true){
+             val++
+            }
+        else {
+            false
+        };
+    }
+
+     render() {
+    return (
+    <div>Linter</div>);
+    }
+}
+
+
+
+
+{
+    "parser": "babel-eslint",
+    "plugins": [
+      "react"
+    ],
+    "rules": {
+      "no-undef": [ 1 ],
+      "quotes": ["error", "double"],
+      "curly": ["error", "multi"],
+      "comma-spacing": ["error", { "before": true, "after": true }]
+    }
+  }
+  
+    
+
+
+
+
+
+{
+    "name": "linter-demo",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "start": "webpack-dev-server --hot"
+    },
+    "dependencies": {
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1",
+        "react-scripts": "3.4.3",
+        "babel-cli": "^6.26.0",
+        "babel-core": "^6.26.3",
+        "babel-loader": "^7.1.5",
+        "babel-preset-es2015": "^6.24.1",
+        "babel-preset-react": "^6.24.1",
+        "html-loader": "^0.5.5",
+        "react-router": "^3.0.5",
+        "react-router-dom": "^5.0.1",
+        "webpack": "^4.16.1",
+        "webpack-cli": "^3.1.0",
+        "webpack-dev-server": "^3.1.4"
+    },
+    "devDependencies": {
+        "babel-eslint": "^10.1.0",
+        "babel-loader": "^8.1.0",
+        "eslint": "^7.10.0",
+        "eslint-loader": "^4.0.2",
+        "eslint-plugin-react": "^7.21.3"
+    }
+}
+
+
+
+
+
+
+https://eslint.org/docs/rules/
+    
+    
+
+
+
+The names "semi" and "quotes" are the names of rules in ESLint. The first value is the error level of the rule and can be one of these values:
+
+"off" or 0 - turn the rule off
+"warn" or 1 - turn the rule on as a warning (doesn't affect exit code)
+"error" or 2 - turn the rule on as an error (exit code will be 1)
+
+                                             
+                                             
+
+
+
+.eslintrc
+
+
+
+
+{
+    "parser": "babel-eslint",
+    "plugins": [
+      "react"
+    ],
+    "rules": {
+      "no-undef": [ 1 ]
+    }
+  }
+  
+    
+    
+    
+    
+    
+    
+
+
+These package extensions work together in our React project to provide linter feedback for JavaScript, JSX and React.
+
+eslint is the core JavaScript linter.
+eslint-loader tells webpack that you want to use eslint in our build
+babel-loader transpiles our code with webpack
+babel-eslint provides linting for valid ES6 code
+eslint-plugin-react extends ESLint rules to cover React
+
+
+
+
+
+
+
+npm run eject
+
+Next just hit y and we’re ready to get rolling.
+
+
+Linter Installation
+From your root folder, install the following linter packages:
+$ npm install --save-dev eslint eslint-loader babel-loader babel-eslint eslint-plugin-react
+
+
+
+
+
+
+Local linting vs project linting
+Most popular code editors either automatically include a linter for the language you’re using or offer multiple extensions so that you can configure how you prefer to lint locally.
+
+While linting locally can and will save us time, there is always the bigger picture - like different code editors and dev environments. In this article, we’re going to focus our attention specifically on the project level with ESLint.
+
+
+
+
+
+
+Despite whether you like spaces or tabs, semicolons or none, single or double quotes, we can all agree on the importance of consistency and clarity in a code base. In this article, we’re going to go over the reasons why we should utilize a linter like ESLint and how to customize it with Create React App.
+
+
+
+
+
+
+
+
+
+
+
+
+"use strict";x = 3.14;                // This will cause an error (x is not defined)
+"use strict";x = {p1:10, p2:20};      // This will cause an error (x is not defined)
+"use strict";var x = 3.14;delete x;                // This will cause an error
+"use strict";function x(p1, p2) {}; delete x;                // This will cause an error 
+"use strict";function x(p1, p1) {};   // This will cause an error
+"use strict";var x = 010;             // This will cause an error
+"use strict";var x = \010;            // This will cause an error
+"use strict";var obj = {};Object.defineProperty(obj, "x", {value:0, writable:false});obj.x = 3.14;            // This will cause an error
+"use strict";var obj = {get x() {return 0} };obj.x = 3.14;            // This will cause an error
+
+"use strict";delete Object.prototype; // This will cause an error
+"use strict";var eval = 3.14;         // This will cause an error
+"use strict";var arguments = 3.14;    // This will cause an error  The string "arguments" cannot be used as a variable:
+"use strict";with (Math){x = cos(2)}; // This will cause an error
+"use strict";eval ("var x = 2");alert (x);      // This will cause an error  For security reasons, eval() is not allowed to create variables in the scope from which it was called:
+
+
+
+
+Declared inside a function, it has local scope (only the code inside the function is in strict mode):
+x = 3.14;       // This will not cause an error. myFunction();function myFunction() {   "use strict";    y = 3.14;   // This will cause an error (y is not defined)}
+
+
+
+
+
+
+"use strict";myFunction();function myFunction() {    y = 3.14;   // This will also cause an error (y is not defined)}
+
+
+
+
+
+Declaring Strict Mode
+Strict mode is declared by adding "use strict"; to the beginning of a JavaScript or a JavaScript function.
+Declared at the beginning of a JavaScript file, it has global scope (all code will execute in strict mode):
+Example
+"use strict";x = 3.14;       // This will cause an error (x is not defined)
+
+
+
+
+
+
+
+
+
+
+"use strict";  Defines that JavaScript code should be executed in "strict mode".
+
+The "use strict" Directive
+The "use strict" directive is new in JavaScript 1.8.5 (ECMAScript version 5).
+
+It is not a sta
+
+tement, but a literal expression, ignored by earlier versions of JavaScript.
+
+The purpose of "use strict" is to indicate that the code should be executed in "strict mode".
+
+With strict mode, you can not, for example, use undeclared variables.
+
+
+
+
+
+
+
+import React from 'react';
+import { shallow } from 'enzyme';
+import login from './index'
+import Login from './index';
+describe('Test case for testing login', () => {
+    let wrapper;
+    test('username check', () => {
+        wrapper = shallow( < Login / > );
+eshan        expect(wrapper.state('username')).toEqual('eshan');
+    })
+    it('password check', () => {
+        wrapper = shallow( < Login / > );
+        wrapper.find('input[type="password"]').simulate('change', { target: { name: 'password', value: 'eshan' } });
+        expect(wrapper.state('password')).toEqual('eshan');
+    })
+    it('login check with right data', () => {
+        wrapper = shallow( < Login / > );
+        wrapper.find('input[type="text"]').simulate('change', { target: { name: 'username', value: 'eshan' } });
+        wrapper.find('input[type="password"]').simulate('change', { target: { name: 'password', value: 'eshan' } });
+        wrapper.find('button').simulate('click');
+        expect(wrapper.state('isLogined')).toBe(true);
+    })
+    it('login check with wrong data', () => {
+        wrapper = shallow( < Login / > );
+        wrapper.find('input[type="text"]').simulate('change', { target: { name: 'username', value: 'eshan' } });
+        wrapper.find('input[type="password"]').simulate('change', { target: { name: 'password', value: 'eshan' } });
+        wrapper.find('button').simulate('click');
+        expect(wrapper.state('isLogined')).toBe(false);
+    })
+})
+
+
+
+
+
+
+
+import React from 'react';
+export default class Login extends React.Component{
+    constructor() {
+        super()
+        this.state = {
+        username: '',
+        password: '',
+        isLogined: false
+        }
+    }
+    // handleInputChange = (event) => {
+    //     // this.setState({
+    //     //     [event.target.name]: event.target.value
+    //     // })
+    // }
+//     submitClick=() =>
+//     {
+//         if((this.state.username=="eshan") &&   (this.state.password=="eshan"))
+// {
+//             this.setState({isLogined:true});
+//         }
+//     }
+     render() {
+    return (
+    <div>
+    <input type="text" name="username" hint="username" onChange=    {this.handleInputChange} />
+    <input type="password" name="password" hint="password" onChange={this.handleInputChange} />
+    <button  name="submit" onClick={this.submitClick}> Submit</button></div>);
+    }
+}
+
+
+
+
+
+
+
+
+
+    https://www.npmjs.com/package/reactjs-component-generator
+        
+        
+        
+        
+    
+    npm install -g reactjs-component-generator
+    

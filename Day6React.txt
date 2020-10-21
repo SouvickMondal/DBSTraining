@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    hello new file
+</body>
+
+</html>
+
+
+
+
+
+import React, { Component } from 'react'
+import htmlContent from './file.html';
+const App = () => (
+    <div dangerouslySetInnerHTML={ {__html: htmlContent} } />
+    )
+
+    export default App;
+  
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+    <title>React Router Tutorial</title>
+</head>
+
+<body>
+    welcome to my application
+    <div id="example"></div>
+    <script src="index.js"></script>
+
+    Ending statement
+</body>
+
+</html>
+
+
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './App.jsx'
+ReactDOM.render( < App / > ,
+    document.getElementById("example")
+);
+
+
+
+
+
+{
+    "name": "my-app",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "webpack-dev-server --hot"
+    },
+    "author": "SBM",
+    "license": "ISC",
+    "dependencies": {
+        "axios": "^0.20.0",
+        "babel-cli": "^6.26.0",
+        "babel-core": "^6.26.3",
+        "babel-loader": "^7.1.5",
+        "babel-preset-es2015": "^6.24.1",
+        "babel-preset-react": "^6.24.1",
+        "html-loader": "^0.5.5",
+        "react": "^16.4.1",
+        "react-dom": "^16.4.1",
+        "react-router": "^3.0.5",
+        "react-router-dom": "^5.0.1",
+        "webpack": "^4.16.1",
+        "webpack-cli": "^3.1.0",
+        "webpack-dev-server": "^3.1.4"
+    }
+}
+
+
+
+const path = require('path');
+
+var config = {
+    entry: './main.js',
+
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'index.js',
+    },
+    devServer: {
+        inline: true,
+        port: 3000
+    },
+
+    module: {
+        rules: [{
+                test: /\.jsx?$/,
+                exclude: /node_modules/,
+                loader: 'babel-loader',
+
+                query: {
+                    presets: ['es2015', 'react']
+                }
+            }, {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            },
+            {
+                test: /\.html$/,
+                use: ["html-loader?config=otherHtmlLoaderConfig"]
+            },
+            {
+                test: /\.ts$/,
+                use: ["ts-loader"]
+            }
+
+        ],
+
+
+    }
+}
+module.exports = config;
+
+
+
+
+
+
+
+1. Assignment 1:
+Create a HTML5 web page which is used for a Stock Trading App which looks like below screen shot.
+
+Requirements: a. The stock ticker symbol and price as below should be displayed in a table format b. The Stock trading form below should allow the user to enter the TICKER symbol and the quantity of shares that the user wishes to purchase. c. The shares/stocks can be purchased only in block of 10s (ie 10 shares, 20 shares, 30 shares…..). Validate that the ‘quantity’ input can only take numbers as its value and min is 10 and max is 100 and can be bought only in blocks of 10s as discussed earlier. d. (optional) You can apply styling attributes to this web page through CSS
+
+2. Assignment 2:
+Create a Web Page for an Event Management Company "Xena Events" which is conducting a hot balloon riding event from Feb 28th 2017 onwards for 5 days.
+
+The Web Page should have the below:
+
+Heading with appropriate name and logo.
+
+A form where people can register for this event with the below details: a. Name : should allow only alphabets. b. Age : should be equal to or greater than 18. c. Email ID : should be a valid email id format d. City: On clicking on the text box, Should display a list that contains city names as "Rajkot", "Vizag" and "Bangalore" but whatever the user enters also should be shown in the list
+
+Note: All entries are "mandatory".
+
+3. Assignment – 3
+Create a Web Page with two horizontal sections.
+
+The top horizontal section should have the heading "Awesome Online videos" along with an image acting as a logo.
+
+The bottom horizontal section should have a view area to play the video of the week.
+
+Under the view area, there should be only 2 buttons "play" and "pause" which the user can use to play or pause the video of the week.
+
+(Optional) both the sections should also give the option to the user to select the color which will be used as the background color for that section.
+
+4. Assignment – 4
+On the Web Page of Agricultural Statistical Department of GOI, we need to show the line chart of the yield of Bajra from 2001 to 2007.
+
+The values are as follows (in lakh tonnes)
+
+2001 : 281
+2002 : 277
+2003 : 275
+2004 : 457
+2005 : 200
+2006 : 280
+2007 : 150
+
+a. Use Canvas and related methods to draw the line chart.
+b. You are free to use any styles/colors of your choice
+5. Assignment- 5
+For the BCCI (Board of Control for Cricket in India) web page, we need to show a line chart for the batting statistics of the Indian team for a T20 cricket match.
+
+The details are as follows:
+
+Over Runs 5 - 40
+10 - 75
+15 - 140
+20 - 210
+
+c. Use Canvas and related methods to draw the line chart.
+d. You are free to use any styles/colors of your choice
+
+
+
+
+
+HTML Practice Exercise
+
+•	Create the html file at the top of page 15 in your book
+o	Create the file using a plain text editor such as Notepad
+o	Save it as Exercise1.htm
+The default file type is .txt. If you do not save your file as .htm instead of .txt if will not display as a web page when you open the file,
+o	Open the file in your browser to verify it is correct
+To open the file: double click the file or 
+Open your browser, hold the ctrl key and type O, click Browse to locate your saved file, highlight the file, Open the file, and click OK. 
+•	 As you read the chapters in the SAMS’ book try the examples by typing them into a plain text editor, save and view them to see what happens
+
+Prepare for the quiz and your first HTML assignment. 
+
+Answer the following questions as you read chapters 1 and 2.  
+1.	What special character is used in an ending HTML tag?
+2.	What tags surround the part of an HTML file that appears to the user on the HTML page? 
+3.	What are the two main parts of an html file? What tags create them?
+4.	What are the delimiters for HTML tags? (What characters surround most html tags?)
+5.	What extension do you use to save an HTML file?
+
+
+Answer the following questions as you read chapters 3 and 4.  
+
+1.	What tags are needed to create headings?
+2.	What tags are needed for the following?
+a.	Bold
+b.	Paragraph
+c.	Line break
+3.	Special characters start with_______ and end with ______.
+4.	What is the symbol for inserting a space?
+5.	What tag is needed to create a link? What attribute?
+6.	What tag is needed to create a link to an e-mail address? What attribute?
+7.	How can you distinguish a link to a URL from a link to an e-mail address?
+
+The exercise and the questions are for practice to help prepare for the quiz and the first HTML assignment.
+
+1] AGE Calculator
+
+WAP to accept two values from text box -> convert to date format and print the difference between two dates
+
+NOTE:- check validation first value should be less than second value
+
+2] display digital clock on screen
+
+3] Hide and seek game
+
+
+4] person class 
+	with name,address,DOB 
+	methods
+		acceptDetails();
+		ageCalculate();
+		displayDetails();
+ 1] AGE Calculator
+
+WAP to accept two values from text box -> convert to date format and print the difference between two dates
+
+NOTE:- check validation first value should be less than second value
+
+2] display digital clock on screen
+
+3] Hide and seek game
+
+
+4] person class 
+	with name,address,DOB 
+	methods
+		acceptDetails();
+		ageCalculate();
+		displayDetails();
+ 3] Hide and seek game
+
+
+
+
+
+
+
+
+
+
+
+function* helloSaga() {
+    console.log('Hello Sagas!')
+}
+
+
+
+
+export default helloSaga;
+
+
+
+
+
+
+import React from 'react'
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'
+import todoApp from './reducers'
+import App from './components/App'
+import helloSaga from './sagas/sagas'
+import createSagaMiddleware from 'redux-saga'
+
+const sagaMiddleware = createSagaMiddleware()
+
+let store = createStore(todoApp, applyMiddleware(sagaMiddleware))
+sagaMiddleware.run(helloSaga);
+
+render( < Provider store = { store } >
+    <
+    App / >
+    <
+    /Provider>,document.getElementById('root')
+)
+
+
+
+
+
+"redux-saga": "^1.1.1"
+        
+        
+        
+
+First we import our Saga from the ./sagas module. Then we create a middleware using the factory function createSagaMiddleware exported by the redux-saga library.
+
+Before running our helloSaga, we must connect our middleware to the Store using applyMiddleware. Then we can use the sagaMiddleware.run(helloSaga) to start our Saga.
+
+So far, our Saga does nothing special. It just logs a message then exits.
+
+
+
+
+
+In order to run our Saga, we need to:
+
+create a Saga middleware with a list of Sagas to run (so far we have only one helloSaga)
+connect the Saga middleware to the Redux store
+We will make the changes to main.js:
+
+// ...
+import { createStore, applyMiddleware } from 'redux'
+import createSagaMiddleware from 'redux-saga'
+
+// ...
+import { helloSaga } from './sagas'
+
+const sagaMiddleware = createSagaMiddleware()
+const store = createStore(
+  reducer,
+  applyMiddleware(sagaMiddleware)
+)
+sagaMiddleware.run(helloSaga)
+
+const action = type => store.dispatch({type})
+
+// rest unchanged
+
+
+
+
+
+Hello Sagas!
+We are going to create our first Saga. Following the tradition, we will write our 'Hello, world' version for Sagas.
+
+Create a file sagas.js then add the following snippet:
+
+export function* helloSaga() {
+  console.log('Hello Sagas!’)
+}	
+
+              
+              
+              
+
+
+As expressed above, actions go through middleware before getting to the reducers, which gives us a great way of applying logic or filters to all actions. This means that the logic is grouped in one place instead of being spread across reducers, that we can easily identify where to investigate if a bug occurs, and we can swap that code out if we ever need to.
+
+Some use-cases that benefit from using middleware:
+
+Logging: every action goes through this middleware, so we can log its type and payload for debugging or tracking purposes.
+Error tracking: if any asynchronous action returned an error, this middleware can display a notification.
+Caching: Only call your API for the same action once, and cache the result for future calls.
+Auth requests: For API calls, apply an authentication token before sending out the request.
+So much more :)
+
+    
+    
+    
+
+The middleware sits in between the dispatch and reducers, which means we can alter our dispatched actions before they get to the reducers or execute some code during the dispatch. An example of a redux middleware is redux-thunk which allows you to write action creators that return a function instead of an action
+
+
+
+Redux Middleware. Middleware provides a way to interact with actions that have been dispatched to the store before they reach the store's reducer. Examples of different uses for middleware include logging actions, reporting errors, making asynchronous requests, and dispatching new actions.
+
+
+
+
+
+https://easyupload.io/vyj4q5
+    
+    
+    
+    
+
+https://gofile.io/d/ze2lhU
+    
+    
+    
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css">
+    <title>Immutable Todo</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="index.js"></script>
+  </body>
+</html>
+
+
+
+
+
+
+
+import { combineReducers } from 'redux'
+import { ADD_TODO } from '../actions/actions'
+
+function todo(state, action) {
+   console.log("ACTION TYPE IN TODO REDUCER"+action.type)
+   switch (action.type) {
+   
+      case ADD_TODO:
+         return {
+            id: action.id,
+            text: action.text,
+         }
+         
+      default:
+      return state
+   }
+}
+
+function todos(state = [], action) {
+   console.log("ACTION TYPE IN TODOS"+action.type)
+   switch (action.type) {
+   
+      case ADD_TODO:
+         return [
+            ...state,
+            todo(undefined, action)
+         ]
+         
+      default:
+      return state
+   }
+}
+
+const todoApp = combineReducers({
+   todos
+})
+
+export default todoApp
+
+
+
+
+
+
+
+components/TodoList.js
+import React, { Component, PropTypes } from 'react'
+import Todo from './Todo.jsx'
+
+export default class TodoList extends Component {
+   render() {
+      return (
+         <ul>
+            {this.props.todos.map(todo ?
+               <Todo
+               key = {todo.id}
+               {...todo}
+               />
+            )}
+         </ul>
+      )
+   }
+}
+
+
+
+
+components/Todo.js
+import React, { Component, PropTypes } from 'react'
+
+export default class Todo extends Component {
+   render() {
+      return (
+         <li>
+            {this.props.text}
+         </li>
+      )
+   }
+}
+
+
+
+components/AddTodo.js
+import React, { Component, PropTypes } from 'react'
+
+export default class AddTodo extends Component {
+   render() {
+      return (
+         <div>
+            <input type = 'text' ref = 'input' />
+				
+            <button onClick = {(e) ? this.handleClick(e)}>
+               Add
+            </button>
+				
+         </div>
+      )
+   }
+
+   handleClick(e) {
+      const node = this.refs.input
+      const text = node.value.trim()
+      this.props.onAddClick(text)
+      node.value = ''
+   }
+}
+
+
+
+
+
+
+
+
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { addTodo } from './actions/actions'
+import AddTodo from './components/AddTodo.jsx'
+import TodoList from './components/TodoList.jsx'
+class App extends Component {
+   render() {
+      const { dispatch, visibleTodos } = this.props
+      return (
+         <div>
+            <AddTodo onAddClick = {text ? dispatch(addTodo(text))} />
+            <TodoList todos = {visibleTodos}/>
+			
+         </div>
+      )
+   }
+}
+function select(state) {
+   return {
+      visibleTodos: state.todos
+   }
+}
+
+export default connect(select)(App)
+
+
+
+
+
+Step 6 - Root Component
+The App component is the root component of the app. Only root component should be aware of a redux. The important part to notice is the connect function which is used for connecting our root component App to the store. This function takes select function as an argument. The select function takes state from the store and returns the props (visibleTodos) that we can use in our components.
+
+
+
+
+
+
+Step 5 - Store
+The store is the place that holds the app's state. It is very easy to create store once you have reducers. We are passing store property to the provider element which wraps our route component.
+
+main.js
+import React from 'react'
+
+import { render } from 'react-dom'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+
+import App from './App.jsx'
+import todoApp from './reducers/reducers'
+let store = createStore(todoApp)
+let rootElement = document.getElementById('app')
+render(
+   <Provider store = {store}>
+      <App />
+   </Provider>,
+   rootElement
+)
+
+
+
+
+
+
+import { combineReducers } from 'redux'
+import { ADD_TODO } from '../actions/actions'
+
+function todo(state, action) {
+   switch (action.type) {
+      case ADD_TODO:
+         return {
+            id: action.id,
+            text: action.text,
+         }
+      default:
+      return state
+   }
+}
+function todos(state = [], action) {
+   switch (action.type) {
+      case ADD_TODO:
+         return [
+            state, todo(undefined, action)
+         ]
+      default:
+      return state
+   }
+}
+const todoApp = combineReducers({
+   todos
+})
+export default todoApp
+
+
+
+Step 4 - Reducers
+While actions only trigger changes in the app, the reducers specify those changes. We are using switch statement to search for a ADD_TODO action. The reducer is a function that takes two parameters (state and action) to calculate and return updated state. The first function will be used to create new item, while the second one will push that item to the list. At the end we are using combineReducers helper function where we can add any new reducers we might use in the future.
+
+
+
+Step 3 - Actions
+Actions are JavaScript objects that use type property to inform about the data that should be sent to the store. We are defining ADD_TODO action that will be used for adding new item to our list. The addTodo function is action creator that returns our action and sets an id for every created item.
+
+actions/actions.js
+
+export const ADD_TODO = 'ADD_TODO'
+
+let nextTodoId = 0;
+
+export function addTodo(text) {
+   return {
+      type: ADD_TODO,
+      id: nextTodoId++,
+      text
+   };
+}
+
+
+
+
+
+
+
+
+
+https://gofile.io/d/3NgxoI
+    
+    
+    
+    
+
+
+https://gofile.io/d/OeowE4
+    
+    
+    
+    
+
+
+Predictability of outcome – Since there is always one source of truth, i.e. the store, there is no confusion about how to sync the current state with actions and other parts of the application.
+Maintainability – The code becomes easier to maintain with a predictable outcome and strict structure.
+Server side rendering – You just need to pass the store that is created on the server, to the client side. This is very useful for initial render and provides a better user experience as it optimizes the application performance.
+Developer tools – From actions to state changes, developers can track everything going on in the application in real time.
+Community and ecosystem – Redux has a huge community behind it which makes it even more captivating to use. A large community of talented individuals contribute to the betterment of the library and develop various applications with it.
+Ease of testing – Redux code are mostly functions which are small, pure and isolated. This makes the code testable and independent.
+Organization – Redux is very precise about how the code should be organized, this makes the code more consistent and easier when a team works with it.
+
+
+
+
+
+
+
+Redux follows three fundamental principles:
+
+Single source of truth: The state of the entire application is stored in an object/ state tree within a single store. The single state tree makes it easier to keep track of the changes over time and debug or inspect the application. For a faster development cycle, it helps to persist the application’s state in development.
+
+State is read-only: The only way to change the state is to trigger an action. An action is a plain JS object describing the change. Just like the state is the minimal representation of data, the action is the minimal representation of the change to that data. An action must have a type property (conventionally a String constant). All the changes are centralized and occur one by one in a strict order.
+
+Changes are made with pure functions: In order to specify how the state tree is transformed by actions, you need pure functions. Pure functions are those whose return values depend solely on the values of their arguments. Reducers are just pure functions that take the previous state and an action and return the next state. You can have a single reducer in your application and as it grows, you can split it off into smaller reducers. These smaller reducers will then manage specific parts of the state tree.
+
+    
+
+
+
+Just like React, Redux is also a library which is used widely for front-end development. It is basically a tool for managing both data-state and UI-state in JavaScript applications. Redux separates the application data and business logic into its own container in order to let React manage just the view. Rather than a traditional library or a framework, it’s an application data-flow architecture. It is most compatible with Single Page Applications (SPAs) where the management of the states over time can get complex.
+
+Redux was created by Dan Abramov and Andrew Clark around June 2015. It was inspired by Facebook’s Flux and influenced by functional programming language Elm. Redux got popular very quickly because of its simplicity, small size (only 2 KB) and great documentation.
+
+
+
+
+
+
+Thus, with Redux, it becomes clear where the components get their state from as well as where should they send their states to. Now the component initiating the change does not have to worry about the list of components needing the state change and can simply dispatch the change to the store. This is how Redux makes the data flow easier.
+
+
+
+
+Redux provides a “store” as a solution to this problem. A store is a place where you can store all your application state together. Now the components can “dispatch” state changes to the store and not directly to the other components. Then the components that need the updates about the state changes can “subscribe” to the store.
+
+
+
+You can write Redux apps with React, Angular, Ember, jQuery, or vanilla JavaScript. That said, Redux works especially well with libraries like React and Deku because they let you describe UI as a function of state, and Reduxemits state updates in response to actions. We will use Reactto build our simple todo app.
+Redux is a simple, truly extensible options framework for WordPress themes and plugins. Built on the WordPress Settings API, Redux supports a multitude of field types as well as custom error handling, custom field & validation types, and import/export functionality.
+
+
+
+
+
+React always flows from parent to child components which makes it unidirectional. This surely keeps our data organized and helps us in controlling the application better. Because of this, the application’s state is contained in specific stores and as a result, the rest of the components remain loosely coupled. This makes our application more flexible leading to increased efficiency. That’s why the communication from a parent component to a child component is convenient.
+But what happens when we try to communicate from a non-parent component?
+
+A child component can never pass data back up to the parent component. React does not provide any way for direct component-to-component communication. Even though React has features to support this approach, it is considered to be a poor practice. It is prone to errors and leads to spaghetti code. So, how can two non-parent components pass data to each other?
+
+This is where the React fails to provide a solution and Redux comes into the picture.
+
+
+
+
+
+
+Flux is a pattern and Redux is a library. ... Both Flux and Redux have actions. Actions can be compared to events (or what trigger events). In Flux, an action is a simple JavaScript object, and that's the default case in Redux too, but when using Redux middleware, actions can also be functions 
+
+
+
+
+
+
+
+
+
+You might be wondering about that externals field. We want to avoid bundling all of React into the same file, since this increases compilation time and browsers will typically be able to cache a library if it doesn’t change.
+
+Ideally, we’d just import the React module from within the browser, but most browsers still don’t quite support modules yet. Instead libraries have traditionally made themselves available using a single global variable like jQuery or _. This is called the “namespace pattern”, and webpack allows us to continue leveraging libraries written that way. With our entry for "react": "React", webpack will work its magic to make any import of "react" load from the React variable.
+
+You can learn more about configuring webpack here.
+
+Putting it all together #
+Just run:
+
+npx webpack
+Now open up index.html in your favorite browser and everything should be ready to use! You should see a page that says “Hello from TypeScript and React!”
+
+
+
+
+
+We’ll also need a page to display our Hello component. Create a file at the root of proj named index.html with the following contents:
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Hello React!</title>
+    </head>
+    <body>
+        <div id="example"></div>
+
+        <!-- Dependencies -->
+        <script src="./node_modules/react/umd/react.development.js"></script>
+        <script src="./node_modules/react-dom/umd/react-dom.development.js"></script>
+
+        <!-- Main -->
+        <script src="./dist/main.js"></script>
+    </body>
+</html>
+
+
+
+
+
+
+
+module.exports = {
+    mode: "production",
+
+    // Enable sourcemaps for debugging webpack's output.
+    devtool: "source-map",
+
+    resolve: {
+        // Add '.ts' and '.tsx' as resolvable extensions.
+        extensions: [".ts", ".tsx"]
+    },
+    module: {
+        rules: [
+            {
+                test: /\.ts(x?)$/,
+                exclude: /node_modules/,
+                use: [
+                    {
+                        loader: "ts-loader"
+                    }
+                ]
+            },
+            // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
+            {
+                enforce: "pre",
+                test: /\.js$/,
+                loader: "source-map-loader"
+            }
+        ]
+    },
+
+    // When importing a module whose path matches one of the following, just
+    // assume a corresponding global variable exists and use that instead.
+    // This is important because it allows us to avoid bundling all of our
+    // dependencies, which allows browsers to cache those libraries between builds.
+    externals: {
+        "react": "React",
+        "react-dom": "ReactDOM"
+    }
+};
+
+
+
+
+
+
+
+
+
+index.tsx
+
+
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+
+import { Hello } from "./components/Hello";
+
+ReactDOM.render(
+    <Hello compiler="TypeScript" framework="React" />,
+    document.getElementById("example")
+);
+
+
+We just imported our Hello component into index.tsx. Notice that unlike with "react" or "react-dom", we used a relative path to Hello.tsx - this is important. If we hadn’t, TypeScript would’ve instead tried looking in our node_modules folder.
+
+
+
+Hello.tsx
+
+
+import * as React from "react";
+
+export interface HelloProps { compiler: string; framework: string; }
+
+export const Hello = (props: HelloProps) => <h1>Hello from {props.compiler} and {props.framework}!</h1>;
+
+
+
+
+
+
+
+
+
+To do this, you’ll need to create a tsconfig.json which contains a list of your input files as well as all your compilation settings. Simply create a new file in your project root named tsconfig.json and fill it with the following contents:
+
+{
+    "compilerOptions": {
+        "outDir": "./dist/",
+        "sourceMap": true,
+        "noImplicitAny": true,
+        "module": "commonjs",
+        "target": "es6",
+        "jsx": "react"
+    }
+}
+
+
+
+
+
+
+
+npm install --save-dev webpack webpack-cli
+Webpack is a tool that will bundle your code and optionally all of its dependencies into a single .js file.
+
+
+npm install --save react react-dom
+npm install --save-dev @types/react @types/react-dom
+
+That @types/ prefix means that we also want to get the declaration files for React and React-DOM. Usually when you import a path like "react", it will look inside of the react package itself; however, not all packages include declaration files, so TypeScript also looks in the @types/react package as well. 
+
+ts-loader and source-map-loader.
+
+npm install --save-dev typescript ts-loader source-map-loader
+Both of these dependencies will let TypeScript and webpack play well together. ts-loader helps Webpack compile your TypeScript code using the TypeScript’s standard configuration file named tsconfig.json. 
+source-map-loader uses any sourcemap outputs from TypeScript to inform webpack when generating its own sourcemaps. This will allow you to debug your final output file as if you were debugging your original TypeScript source code.
+
+
+
+
+
+
+
+
+Use files with the extension .tsx (instead of .ts).
+Use "jsx" : "react" in your tsconfig.json's compilerOptions.
+Install the definitions for JSX and React into your project : (npm i -D @types/react @types/react-dom).
+Import react into your .tsx files (import * as React from "react").
+
+
+
+Lay out the project #
+Let’s start out with a new directory. We’ll name it proj for now, but you can change it to whatever you want.
+
+proj/
++- dist/
++- src/
+   +- components/
+
+TypeScript files will start out in your src folder, run through the TypeScript compiler, then webpack, and end up in a main.js file in dist. Any components that we write will go in the src/components folder.
+
+
+
+
+
+
+
+
+
+create-react-app my-app --typescript
+
+
+
+
+
+
+https://gofile.io/d/Bqi2zA
+    
+    
+    
+    
+    
+    DAY 6
