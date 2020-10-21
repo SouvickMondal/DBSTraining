@@ -1,0 +1,11 @@
+{
+  "name": "day11counter",
+  "version": "1.0.0",
+  "description": "ssssouvickmondal",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Souvick Mondal",
+  "license": "MIT"
+}
