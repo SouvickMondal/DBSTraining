@@ -1,0 +1,6 @@
+management.endpoints.web.exposure.include=*
+
+logging.level.root=WARN
+
+logging.file.name=logs/mylog.log
+spring.output.ansi.enabled=ALWAYS

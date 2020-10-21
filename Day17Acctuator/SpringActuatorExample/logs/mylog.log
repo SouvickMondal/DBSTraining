@@ -1,0 +1,18 @@
+2020-10-19 17:18:16.140  WARN 5864 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2020-10-19 17:18:16.473  WARN 5864 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.PortInUseException: Port 8080 is already in use
+2020-10-19 17:18:16.655 ERROR 5864 --- [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2020-10-19 17:33:24.710  WARN 5292 --- [http-nio-8081-exec-1] com.training.org.LoggingController       : This is a WARN message.
+2020-10-19 17:33:24.720 ERROR 5292 --- [http-nio-8081-exec-1] com.training.org.LoggingController       : You guessed it, an ERROR message.

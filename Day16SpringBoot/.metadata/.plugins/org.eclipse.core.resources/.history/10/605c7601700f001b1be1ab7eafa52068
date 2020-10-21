@@ -1,0 +1,30 @@
+package com.training.org;
+
+import java.util.Arrays;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@SpringBootApplication
+public class SouvickSpringBootAppApplication {
+	@Value("${spring.application.name}")
+	private String appName;
+	@GetMapping("/")
+	public String getDetails() {
+		return appName;
+	}
+	public static void main(String[] args) {
+		ApplicationContext ctx=SpringApplication.run(SouvickSpringBootAppApplication.class, args);
+        String[] beanNames = ctx.getBeanDefinitionNames();
+        Arrays.sort(beanNames);
+        for (String beanName : beanNames){
+            System.out.println(beanName);
+        }
+	}
+
+
+
+}

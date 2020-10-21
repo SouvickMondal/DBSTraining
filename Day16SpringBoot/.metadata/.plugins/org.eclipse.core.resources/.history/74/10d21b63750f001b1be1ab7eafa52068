@@ -1,0 +1,14 @@
+spring.application.name = myApplication
+
+
+mail.hostname=host@gmail.com
+mail.port=9090
+mail.from=mailer@gmail.com
+
+
+#List properties
+mail.mailCollection[0]=abc@gmail.com
+mail.mailCollection[1]=pqr@gmail.com
+mail.mailCollection[2]=xyz@gmail.com
+
+

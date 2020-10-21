@@ -1,0 +1,35 @@
+package com.training.org;
+
+class Role{
+	private String roleName;
+	private int sal;
+	public String getRoleName() {
+		return roleName;
+	}
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
+	public int getSal() {
+		return sal;
+	}
+	public void setSal(int sal) {
+		this.sal = sal;
+	}
+	public Role(String roleName, int sal) {
+		super();
+		this.roleName = roleName;
+		this.sal = sal;
+	}
+	
+}
+
+public class User {
+	private String email;
+	private String password;
+	private String phoneNumber;
+	private String Address;
+	private boolean verified;
+	private List<Role> roles;
+	private boolean enabled;
+
+}
